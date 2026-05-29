@@ -1,0 +1,105 @@
+{
+  "total_spools": 11,
+  "spools": [
+    {
+      "id": 4,
+      "name": "Sunlu White",
+      "material": "PETG",
+      "color": "FFFFFF",
+      "remaining_weight": 1000.0,
+      "used_weight": 0.0,
+      "location": ""
+    },
+    {
+      "id": 5,
+      "name": "Sunlu Black",
+      "material": "PLA",
+      "color": "000000",
+      "remaining_weight": 862.8141663692838,
+      "used_weight": 137.1858336307161,
+      "location": ""
+    },
+    {
+      "id": 6,
+      "name": "Sunlu Gold",
+      "material": "PLA+",
+      "color": "EFA537",
+      "remaining_weight": 679.0,
+      "used_weight": 321.0,
+      "location": ""
+    },
+    {
+      "id": 7,
+      "name": "Sunlu Grey",
+      "material": "PETG",
+      "color": "303030",
+      "remaining_weight": 1000.0,
+      "used_weight": 0.0,
+      "location": ""
+    },
+    {
+      "id": 8,
+      "name": "Sunlu White",
+      "material": "PETG",
+      "color": "FFFFFF",
+      "remaining_weight": 1000.0,
+      "used_weight": 0.0,
+      "location": ""
+    },
+    {
+      "id": 10,
+      "name": "eSun Black ASA+",
+      "material": "ASA",
+      "color": "000000",
+      "remaining_weight": 596.2737231422151,
+      "used_weight": 403.7262768577849,
+      "location": ""
+    },
+    {
+      "id": 11,
+      "name": "Polymaker PolyFlex\u2122\u00a0TPU90 Black",
+      "material": "TPU",
+      "color": "000000",
+      "remaining_weight": 718.8496463187522,
+      "used_weight": 31.15035368124782,
+      "location": ""
+    },
+    {
+      "id": 13,
+      "name": "Polymaker PolyLite\u2122 PETG Clear",
+      "material": "PETG",
+      "color": "F4FAFC",
+      "remaining_weight": 996.4668260716072,
+      "used_weight": 3.533173928392814,
+      "location": ""
+    },
+    {
+      "id": 14,
+      "name": "Polymaker Polylite Galaxy Black PLA",
+      "material": "PLA",
+      "color": "000000",
+      "remaining_weight": 411.72949212813455,
+      "used_weight": 588.2705078718654,
+      "location": ""
+    },
+    {
+      "id": 15,
+      "name": "Polymaker PolyLite\u2122 ASA Red",
+      "material": "ASA",
+      "color": "AF231C",
+      "remaining_weight": 959.8632322704578,
+      "used_weight": 40.13676772954211,
+      "location": ""
+    },
+    {
+      "id": 16,
+      "name": "Polymaker PolyLite\u2122 ASA Black",
+      "material": "ASA",
+      "color": "000000",
+      "remaining_weight": 957.7754060528171,
+      "used_weight": 42.22459394718292,
+      "location": ""
+    }
+  ],
+  "last_updated": "2026-05-29 18:03:32"
+}
