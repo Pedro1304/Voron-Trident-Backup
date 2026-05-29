@@ -5,7 +5,7 @@
 - **Mainboard:** BTT Octopus Pro (CAN UUID: `24de3c7cb71e`)
 - **SBC:** BTT CB2, username `biqu`, timezone `Europe/Lisbon`
 - **Software:** Mainsail, Moonraker, Klipper, Spoolman (Docker), Tailscale
-- **GitHub backup:** `Pedro1304/Voron-Trident-Backup` via SSH key `~/.ssh/github_backup`
+- **GitHub backup:** `Pedro1304/Voron-Trident-Backup` via SSH key `~/.ssh/github_backup`, service `voron-backup.service`
 - **Systemd note:** CB2 interactive editor always saves empty files — use `sudo tee ... << 'EOF'` for all systemd overrides
 
 ## Display
@@ -39,7 +39,7 @@
 ## Toolhead — XOL
 ### Extruder
 - **Current:** Orbiter v2.0 (LDO-36STH20-1004AHG motor)
-- **Pending:** Orbiter v2.5 upgrade kit on hand — install with Turbiter/CPAP mod
+- **Pending:** Orbiter v2.5 upgrade kit on hand — install together with Turbiter/CPAP mod
 - **Driver:** TMC2209 on EBB36, 0.85A run / 0.1A hold
 - **rotation_distance:** 4.637, 200 full steps, 16 microsteps
 - **Thermal issue:** Motor reaches ~105–110°C in 60°C chamber at 0.85A — Turbiter cooling pending
@@ -61,11 +61,11 @@
 - **Orbiter unload button:** `EBBCan:PB3`
 - **Motor thermistor (pending):** `EBBCan:PA2` (TH1) — NTC B3950 in Turbiter housing pocket
 
-### Pending Toolhead Mods
-- Turbiter 3010 blower cooling for Orbiter motor
+### Pending Toolhead Mods (doing all at once)
+- Orbiter v2.5 install
+- Turbiter 3010 blower motor cooling
 - CPAP part cooling
-- EBB36 relocation to side mount (conflicts with Turbiter in current position)
-- Orbiter v2.5 install (simultaneous with above)
+- EBB36 relocation to side mount (current position conflicts with Turbiter)
 - NTC B3950 motor thermistor wired to `EBBCan:PA2`
 
 ## Probe & Z Endstop
@@ -76,27 +76,41 @@
 - **safe_z_home:** 165,259
 
 ## Bed & Thermal
-- **Bed:** 250mm, ATC Semitec 104GT-2 thermistor, max 130°C
+- **Bed:** 250mm, 6061 aluminium 8mm plate 254×254mm, magnetic PEI spring steel sheet
+- **Bed heater:** Silicone 110/220V 500W (254×254mm)
+- **Thermistor:** ATC Semitec 104GT-2, max 130°C
 - **Mesh:** 5×5, min 5,24 / max 245,244, KAMP adaptive meshing enabled
-- **Chamber sensor:** SHT3X (I2C), i2c_software_scl `PB8`, sda `PB9`
+- **Chamber sensor:** SHT31 (SHT3X compatible), I2C, scl `PB8`, sda `PB9`
 - **Chamber heater:** PID, max 70°C, heater pin `PA0`, fan `PE5`
 - **Bed fans:** `PD15` — auto-managed, 100% when bed target active
 - **Intake fans:** `PA8`
 - **Exhaust fans:** `PD12`, `PD13`
 - All fans auto-managed via `UPDATE_FANS` macro based on bed/chamber/controller temps
 
-## Lighting & UI
-- **Chamber LEDs:** 32× GRB NeoPixel chain, Octopus `PB10`
-  - Red = standby, Cyan = printing, Pulse animation on pause
-- **Brightness button:** Physical button on Octopus `PD6`, cycles 0/25/50/75/100%
-- **Beeper:** Octopus `PB0`, PWM — boot chime + print state chimes
+## Lighting, Audio & UI
 
-## Multi-Material (In Progress)
-- **Unit:** BoxTurtle 4-lane, top-mounted on printer
-- **Controller:** AFC-Lite board
+### Chamber LEDs
+- 32× GRB NeoPixel chain, Octopus `PB10`
+- Red = standby, Cyan = printing, Pulse animation (cyan↔orange) on pause, transition animation on print start
+
+### Physical Buttons
+- **LED brightness cycle button:** Octopus `PD6` — cycles 0/25/50/75/100% white brightness via `CYCLE_LED_BRIGHTNESS` macro
+- **Planned:** More buttons for different tasks (e.g. power button style — 12mm metal illuminated, 12-24V self-reset)
+
+### Audio
+- **Amp:** HW-104 (PAM8403), 5V, 3W/channel
+- **Signal pin:** Octopus `PB0` (PWM, `[output_pin beeper]`)
+- **Wiring:** 5V from buck converter, GND shared with Octopus, signal from PB0, L IN- tied to GND
+- **Capability:** Monophonic only (single PWM tone at a time) — multi-tone would require ESP32+I2S DAC (future project)
+- **Macros:** M300 (tone), CHIME_START, CHIME_DONE, CHIME_CANCEL, CHIME_PAUSE, SET_VOLUME, boot chime on startup
+
+## Multi-Material (Paused)
+- **Unit:** BoxTurtle 4-lane, top-mounted
+- **Controller:** AFC-Lite board with lane control buttons (not working yet)
 - **Buffer:** TurtleNeck Pro
 - **Cutter:** FilamATrix (planned)
-- **Software:** AFC-Klipper Add-On (`[include AFC/*.cfg]` already in printer.cfg)
+- **Software:** AFC-Klipper Add-On (`[include AFC/*.cfg]` in printer.cfg)
+- **Status:** Uninstalled/paused — unreliable, focusing on toolhead mods first
 - **Planned integration:** Happy Hare + Spoolman pull mode
 
 ## Key Config Files
@@ -112,7 +126,7 @@
 | `klicky-bed-mesh-calibrate.cfg` | Mesh with Klicky |
 | `Orbiter2_SmartSensor.cfg` | Filament runout/autoload macros |
 | `KAMP_Settings.cfg` | Adaptive mesh settings |
-| `AFC/*.cfg` | BoxTurtle / multi-material configs |
+| `AFC/*.cfg` | BoxTurtle / multi-material configs (paused) |
 
 ## Known Issues & History
 - CB2 systemd interactive editor saves empty files — always use `sudo tee`
@@ -120,3 +134,5 @@
 - Sensorless homing SGT was 2, raised to 3 after early-trigger on X
 - Auto-z plugin removed after extensive troubleshooting; zero_reference_position was corrupting mesh offsets
 - HelixScreen install attempted but service not found; currently on KlipperScreen
+- BoxTurtle uninstalled — unreliable operation, AFC lane control buttons not working
+- HW-104 amp is monophonic only; multi-tone audio requires different hardware (ESP32+I2S, future)
