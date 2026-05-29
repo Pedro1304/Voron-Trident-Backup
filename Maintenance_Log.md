@@ -100,7 +100,7 @@
 | 2026-05-29 | 225.8h | Input shaper re-calibrated | X=MZV 71.0Hz, Y=MZV 52.4Hz — with hula feet installed. Y changed from EI to MZV, freq dropped due to feet dampening frame resonance (expected). |
 | 2026-05-29 | — | OrcaSlicer backup set up | Daily auto-backup to Pedro1304/OrcaSlicer-Backup |
 | 2026-05-29 | 225.8h | Belt tension check | X and Y belts tensioned |
-| 2026-05-29 | 225.8h | Leadscrew & rail lubrication | TR8×4 leadscrews + all MGN rails. Next due ~2026-08-29 or ~275h |
+| 2026-05-29 | 225.8h | Leadscrew & rail lubrication | TR8×4 leadscrews + all MGN rails. Next due whichever comes first: ~2026-08-29 OR ~275.8h |
 | 2026-01-13 | — | Nozzle installed | Bondtech CHT Coated Brass 0.4mm (Nickel coated, high flow) |
 | 2026-05-15 | — | PEI sheet replaced | New magnetic PEI spring steel sheet installed |
 
@@ -117,6 +117,6 @@
 | Nozzle replacement (CHT Brass) | ~2026-07-13 | Installed 2026-01-13 — monitor condition at 6 months |
 | PEI sheet check | ~2026-11-15 | Replaced ~2026-05-15 — monitor for delamination/wear at 6 months |
 | Belt tension check | 2026-06-29 | ✅ Done 2026-05-29 — next in ~1 month |
-| Leadscrew lubrication | 2026-08-29 | ✅ Done 2026-05-29 @ 225.8h — next in ~3 months |
-| Rail lubrication | 2026-08-29 | ✅ Done 2026-05-29 @ 225.8h — next in ~3 months |
+| Leadscrew lubrication | 2026-08-29 or 275.8h | ✅ Done 2026-05-29 @ 225.8h — whichever comes first |
+| Rail lubrication | 2026-08-29 or 275.8h | ✅ Done 2026-05-29 @ 225.8h — whichever comes first |
 

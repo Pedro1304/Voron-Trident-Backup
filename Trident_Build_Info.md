@@ -17,7 +17,7 @@
 - **Remote access:** Tailscale — IP: `100.91.164.122`
 - **Mainsail (remote):** `http://100.91.164.122`
 - **Moonraker auth:** Tailscale subnet `100.64.0.0/10` added to trusted_clients
-- **Spoolman:** Running via Docker, accessible via Mainsail
+- **Spoolman:** Running via Docker on port 8000 — `http://192.168.1.14:8000`
 
 ## Display
 - **BTT HDMI5 V1.2** — 5" IPS touchscreen, HDMI + USB touch
@@ -27,7 +27,7 @@
 - **Angry CAM USB V2** (chri.kai.in mod) — Waveshare OV5648 5MP USB, mounted to frame/gantry
 
 ## Feet
-- **Hula feet** — anti-vibration silicone feet mod, installed before 2026-05-29 input shaper calibration
+- **Hula feet** — anti-vibration silicone feet mod, installed 2026-05-27
 - All input shaper values are calibrated with hula feet in place — recalibrate if feet are removed/replaced
 
 ## CAN Bus Network
@@ -134,15 +134,17 @@
 - **Heater fan:** `PE5` — runs while chamber heater active, 45s cooldown after
 
 ## Print Materials & Typical Settings
-| Material | Hotend | Bed | Chamber | Notes |
-|----------|--------|-----|---------|-------|
-| ASA | 260°C | 100°C | 60°C | Main material (74% of all prints) |
-| PETG | 230–250°C | 70–85°C | Off / <40°C | Door cracked if chamber >40°C |
-| PLA | 210°C | 60°C | Off | — |
+| Material | Hotend | Bed | Chamber | PA | Notes |
+|----------|--------|-----|---------|-----|-------|
+| ASA (Polymaker) | 260°C | 100°C | 55°C | per filament from slicer | Main material (74% of all prints). Flow ratio 0.938, max vol speed 23mm³/s |
+| PETG (Sunlu) | 250°C | 85°C | Off / <40°C | 0.045 | Flow ratio 0.96, max vol speed 25mm³/s. Door cracked if chamber >40°C |
+| PLA | 210°C | 60°C | Off | per filament from slicer | — |
+| TPU (Polyflex TPU90) | 220°C | 45°C | Off | 0.1 | Flow ratio 0.99. Polymaker brand |
 
 ## Slicer
 - **OrcaSlicer** (Windows)
-- **Printer profile name:** Voron Trident 250
+- **Printer profile name:** Voron Trident 250 0.4 nozzle
+- **Pressure advance:** Set per filament in OrcaSlicer profiles (not globally in Klipper) — PETG=0.045, TPU=0.1, ASA/PLA=per profile
 - **Config backup:** `Pedro1304/OrcaSlicer-Backup` (private GitHub repo)
 - **Backed up folders:** `user`, `system`, `printers`, `plugins`
 - **Backup script:** `C:\Users\pmade\Documents\orca-backup.ps1`
@@ -214,6 +216,18 @@ sudo docker ps | grep spoolman
 
 # Tailscale status
 tailscale status
+
+# Get print stats summary
+curl -s "http://localhost/server/history/list?limit=9999" | python3 -c "
+import json,sys
+data=json.load(sys.stdin); jobs=data['result']['jobs']
+print(f'Jobs: {len(jobs)}, Hours: {sum(j[\"print_duration\"] for j in jobs)/3600:.1f}, Filament: {sum(j[\"filament_used\"] for j in jobs)/1000:.1f}m')
+"
+
+# Run input shaper calibration (both axes)
+# Home and level first, then:
+AXES_SHAPER_CALIBRATION
+# Results saved to ~/printer_data/config/ShakeTune_results/
 ```
 
 ## Maintenance
