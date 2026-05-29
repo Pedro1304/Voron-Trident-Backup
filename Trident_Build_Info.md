@@ -26,6 +26,10 @@
 ## Camera
 - **Angry CAM USB V2** (chri.kai.in mod) — Waveshare OV5648 5MP USB, mounted to frame/gantry
 
+## Feet
+- **Hula feet** — anti-vibration silicone feet mod, installed before 2026-05-29 input shaper calibration
+- All input shaper values are calibrated with hula feet in place — recalibrate if feet are removed/replaced
+
 ## CAN Bus Network
 - **Interface:** `can0`, bitrate: `1000000` (1Mbit)
 - **Topology:** Octopus Pro (bridge) → EBB36 → (Cartographer spur, when added)
@@ -65,10 +69,10 @@
 - **Z-tilt speed:** 175 mm/s
 
 ### Input Shaper
-- **X:** MZV @ 72.8Hz
-- **Y:** EI @ 64.4Hz
+- **X:** MZV @ 71.0Hz
+- **Y:** MZV @ 52.4Hz
 - ShakeTune installed, calibration kept manual (SAVE_CONFIG restarts Klipper)
-- **Last calibrated:** 2026-05-29 (pending — scheduled today)
+- **Last calibrated:** 2026-05-29 (with hula feet installed — values will differ from pre-feet calibration)
 
 ## Toolhead — XOL
 ### Extruder

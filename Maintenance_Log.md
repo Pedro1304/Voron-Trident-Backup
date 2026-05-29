@@ -96,7 +96,8 @@
 | ~2025 | — | Auto-z plugin removed | Persistent conflicts; switched to standard z_offset |
 | ~2025 | — | zero_reference_position corrected | Was 165,259 (Sexbolt), changed to 125,125 (bed center) |
 | ~2025 | — | TRSYNC_TIMEOUT patched 0.025→0.075 | CAN bus timing fix |
-| ~2025 | — | Input shaper calibrated | X=MZV 72.8Hz, Y=EI 64.4Hz |
+| ~2025 | — | Input shaper calibrated | X=MZV 72.8Hz, Y=EI 64.4Hz (pre-hula feet) |
+| 2026-05-29 | 225.8h | Input shaper re-calibrated | X=MZV 71.0Hz, Y=MZV 52.4Hz — with hula feet installed. Y changed from EI to MZV, freq dropped due to feet dampening frame resonance (expected). |
 | 2026-05-29 | — | OrcaSlicer backup set up | Daily auto-backup to Pedro1304/OrcaSlicer-Backup |
 | 2026-05-29 | 225.8h | Belt tension check | X and Y belts tensioned |
 | 2026-05-29 | 225.8h | Leadscrew & rail lubrication | TR8×4 leadscrews + all MGN rails. Next due ~2026-08-29 or ~275h |
