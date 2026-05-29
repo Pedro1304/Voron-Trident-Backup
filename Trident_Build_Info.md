@@ -34,7 +34,7 @@
 - **Note:** Cannot flash EBB36 over CAN while Cartographer is connected — unplug CAN-H/L first
 
 ## Power System
-- **Main PSU:** 24V (voltage/wattage — *fill in*)
+- **Main PSU:** Meanwell LRS-350-24 (salvaged from Ender 3 Pro) — 24V, 350W, 14.6A
 - **5V buck converter:** Powers HW-104 amp and LED strip logic — GND shared with Octopus
 - **Chamber heater:** PTC 24V 150W — powered directly from 24V rail
 - **Bed heater:** Silicone 110/220V 500W — mains powered via SSR
