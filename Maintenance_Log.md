@@ -1,9 +1,7 @@
 # Voron Trident 250 — Maintenance Log
 *Last updated: 2026-05-29*
 
-> **Note on print stats:** Moonraker API is not reachable from outside your local network.
-> To get current print time/job count, open Mainsail → History and check totals manually,
-> or run on CB2: `curl -s http://localhost/server/history/summary`
+> **Note on print stats:** Stats auto-fetched every 60s by `autobackup.sh` via `http://localhost/server/history/list?limit=9999` and saved to `print_stats.json`.
 
 ---
 
@@ -13,6 +11,7 @@
 | Total print time | 225.8 hours | 2026-05-29 |
 | Total jobs | 726 | 2026-05-29 |
 | Filament used (total) | 1536.6 meters | 2026-05-29 |
+| Most used filament | *fetching from history* | 2026-05-29 |
 
 ---
 
@@ -48,6 +47,7 @@
 - [ ] **Z tilt verification** — run Z_TILT_ADJUST and check deviation
 - [ ] **Bed mesh comparison** — compare new mesh to saved default, check for changes
 - [ ] Deep clean hotend area — remove filament residue from nozzle, heatblock, silicone sock
+- [ ] **⚠️ CHT Coated nozzle:** Do NOT cold pull — damages nickel coating. Use hot pull (purge at high temp) only.
 - [ ] Check EBB36 CAN connector seating
 - [ ] Inspect Sexbolt Z endstop — clean contact surface, check D2HW switch travel
 
@@ -66,6 +66,8 @@
 - [ ] **Re-run Z_ENDSTOP_CALIBRATE** — if first layer height shifts unexpectedly
 - [ ] **Re-run PROBE_CALIBRATE** — if z_offset drifts or nozzle is replaced
 - [ ] **Belt replacement** — if tension cannot be maintained or visible wear/cracking
+- [ ] **Moonraker DB backup** — periodically copy `~/printer_data/data/moonraker.db` somewhere safe (not in git repo — binary file). History can be cleared unexpectedly.
+- [ ] **Nozzle cold pull** — not yet practiced; consider adding for hotend maintenance routine (NOT for CHT coated nozzle — damages nickel coating; use hot pull / purge only)
 - [ ] **Orbiter v2.5 upgrade** — when doing Turbiter/CPAP mod (parts on hand)
 
 ---
@@ -73,6 +75,7 @@
 ## Task History
 | Date | Print Hours | Task | Notes |
 |------|-------------|------|-------|
+| ~2025 | — | Print history cleared | Reason unknown — only 1 job remained in Moonraker DB. 726 jobs/225.8h recovered from full list endpoint. Consider periodic Moonraker DB backup. |
 | ~2025 | — | SGT raised 2→3 | Sensorless homing early trigger on X |
 | ~2025 | — | Auto-z plugin removed | Persistent conflicts; switched to standard z_offset |
 | ~2025 | — | zero_reference_position corrected | Was 165,259 (Sexbolt), changed to 125,125 (bed center) |
@@ -80,8 +83,9 @@
 | ~2025 | — | Input shaper calibrated | X=MZV 72.8Hz, Y=EI 64.4Hz |
 | 2026-05-29 | — | OrcaSlicer backup set up | Daily auto-backup to Pedro1304/OrcaSlicer-Backup |
 | 2026-05-29 | — | Belt tension check | X and Y belts tensioned |
-| ~2026-02-29 | — | Leadscrew & rail lubrication | Approx 3 months ago from 2026-05-29 |
+| 2026-05-29 | 225.8h | Leadscrew & rail lubrication | TR8×4 leadscrews + all MGN rails. Next due ~2026-08-29 or ~275h |
 | 2026-01-13 | — | Nozzle installed | Bondtech CHT Coated Brass 0.4mm (Nickel coated, high flow) |
+| ~2026-05-15 | 225.8h | PEI sheet replaced | New magnetic PEI spring steel sheet installed |
 
 ---
 
@@ -94,7 +98,8 @@
 | Cartographer probe install | After toolhead mods | Planned |
 | BoxTurtle recommission | After toolhead mods | Paused |
 | Nozzle replacement (CHT Brass) | ~2026-07-13 | Installed 2026-01-13 — monitor condition at 6 months |
+| PEI sheet check | ~2026-11-15 | Replaced ~2026-05-15 — monitor for delamination/wear at 6 months |
 | Belt tension check | 2026-06-29 | ✅ Done 2026-05-29 — next in ~1 month |
-| Leadscrew lubrication | ~2026-05-29 | ⚠️ Due now — last done ~3 months ago |
-| Rail lubrication | ~2026-05-29 | ⚠️ Due now — last done ~3 months ago |
+| Leadscrew lubrication | 2026-08-29 | ✅ Done 2026-05-29 @ 225.8h — next in ~3 months |
+| Rail lubrication | 2026-08-29 | ✅ Done 2026-05-29 @ 225.8h — next in ~3 months |
 
