@@ -11,7 +11,23 @@
 | Total print time | 225.8 hours | 2026-05-29 |
 | Total jobs | 726 | 2026-05-29 |
 | Filament used (total) | 1536.6 meters | 2026-05-29 |
-| Most used filament | *fetching from history* | 2026-05-29 |
+| Most used filament | ASA 74% (1180m / 490 jobs) | 2026-05-29 |
+
+---
+
+## Filament Usage Breakdown
+*Last updated: 2026-05-29 — from 726 job history*
+
+| Material | Meters | Jobs | % of total |
+|----------|--------|------|------------|
+| ASA (all brands) | 1180.9m | 490 | 74% |
+| PLA | 242.2m | 71 | 16% |
+| PETG | 65.6m | 136 | 4% |
+| TPU (Polyflex TPU90) | 37.1m | 18 | 2% |
+| Unknown/Other | 10.8m | 5 | <1% |
+
+**Primary material: ASA** — relevant for nozzle wear rate, chamber temp requirements, and PEI sheet longevity.
+**Nozzle wear note:** CHT Coated Brass is suitable for ASA but not abrasive filaments. No carbon fibre or glow filaments.
 
 ---
 
