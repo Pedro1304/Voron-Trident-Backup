@@ -26,9 +26,12 @@
 ## Camera
 - **Angry CAM USB V2** (chri.kai.in mod) — Waveshare OV5648 5MP USB, mounted to frame/gantry
 
-## Feet
-- **Hula feet** — anti-vibration silicone feet mod, installed 2026-05-27
-- All input shaper values are calibrated with hula feet in place — recalibrate if feet are removed/replaced
+## Frame & Enclosure
+- **Frame:** Self-sourced Voron Trident 250
+- **Enclosure panels:** Acrylic
+- **Feet:** Hula feet (anti-vibration silicone) — installed 2026-05-27
+- **Surface:** Sitting on top of a Bambu P1 — hula feet critical to isolate vibration between machines. Do not print on both simultaneously at high speeds.
+- All input shaper values calibrated with hula feet in place — recalibrate if feet are removed/replaced
 
 ## CAN Bus Network
 - **Interface:** `can0`, bitrate: `1000000` (1Mbit)
