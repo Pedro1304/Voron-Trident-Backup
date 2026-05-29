@@ -10,9 +10,9 @@
 ## Current Stats
 | Metric | Value | Last checked |
 |--------|-------|-------------|
-| Total print time | *fill in* | *fill in* |
-| Total jobs | *fill in* | *fill in* |
-| Filament used (total) | *fill in* | *fill in* |
+| Total print time | 225.8 hours | 2026-05-29 |
+| Total jobs | 726 | 2026-05-29 |
+| Filament used (total) | 1536.6 meters | 2026-05-29 |
 
 ---
 
