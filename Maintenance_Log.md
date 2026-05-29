@@ -109,6 +109,7 @@
 | 2026-05-29 | 225.8h | Sensorless homing verified | Reliable triggering confirmed after belt tension |
 | 2026-05-29 | 225.8h | PEI sheet IPA clean | Thorough clean, ~2 weeks since install |
 | 2026-05-29 | 225.8h | Hotend inspection | Silicone sock removed, checked for filament creep — all good |
+| 2026-05-29 | 225.8h | z_calibration removed from disk | `~/klipper_z_calibration` deleted — already removed from config and moonraker.conf |
 
 ---
 
