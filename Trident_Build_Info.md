@@ -129,6 +129,7 @@
 | `AFC/*.cfg` | BoxTurtle / multi-material configs (paused) |
 
 ## Known Issues & History
+- Klipper shows "DIRTY" warning in Mainsail update manager — `klippy/mcu.py` is modified from stock, expected behaviour from installed extras (AFC/ShakeTune). Safe to ignore.
 - CB2 systemd interactive editor saves empty files — always use `sudo tee`
 - Spoolman has boot race condition with Docker — fixed via Moonraker systemd override (30s delay + After=docker.service)
 - Sensorless homing SGT was 2, raised to 3 after early-trigger on X
