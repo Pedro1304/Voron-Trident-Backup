@@ -241,3 +241,4 @@ See **Maintenance_Log.md** in this repo for full schedule, task history, filamen
 - **Auto-z plugin:** Removed after extensive issues; zero_reference_position at Sexbolt location was corrupting mesh offsets
 - **BoxTurtle:** Uninstalled — unreliable, AFC lane control buttons not working
 - **HW-104 amp:** Monophonic only — ESP32+I2S needed for multi-tone (future project)
+- **ADXL345 SPI interference during ShakeTune:** During `AXES_SHAPER_CALIBRATION`, two `spi_transfer_response` errors occur at high frequencies, causing Klipper shutdown before Y axis completes. Workaround: run each axis separately (`AXES_SHAPER_CALIBRATION AXIS=X` then `AXES_SHAPER_CALIBRATION AXIS=Y` with a `FIRMWARE_RESTART` between). Root cause likely marginal SPI wiring on EBB36 picking up interference during high-frequency vibration. Monitor — may worsen over time. Inspect `EBBCan:PB12` SPI wiring if it gets worse.
