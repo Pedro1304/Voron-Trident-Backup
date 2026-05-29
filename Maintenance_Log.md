@@ -16,7 +16,7 @@
 ---
 
 ## Filament Usage Breakdown
-*Last updated: 2026-05-29 — from 726 job history*
+*Last updated: 2026-05-29*
 
 | Material | Meters | Jobs | % of total |
 |----------|--------|------|------------|
