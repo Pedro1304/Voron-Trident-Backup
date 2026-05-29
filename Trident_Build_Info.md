@@ -21,7 +21,7 @@
 
 ## Display
 - **BTT HDMI5 V1.2** — 5" IPS touchscreen, HDMI + USB touch
-- KlipperScreen running, HelixScreen installed but inactive
+- KlipperScreen running
 
 ## Camera
 - **Angry CAM USB V2** (chri.kai.in mod) — Waveshare OV5648 5MP USB, mounted to frame/gantry
@@ -137,9 +137,9 @@
 | Material | Hotend | Bed | Chamber | PA | Notes |
 |----------|--------|-----|---------|-----|-------|
 | ASA (Polymaker) | 260°C | 100°C | 55°C | per filament from slicer | Main material (74% of all prints). Flow ratio 0.938, max vol speed 23mm³/s |
-| PETG (Sunlu) | 250°C | 85°C | Off / <40°C | 0.045 | Flow ratio 0.96, max vol speed 25mm³/s. Door cracked if chamber >40°C |
-| PLA | 210°C | 60°C | Off | per filament from slicer | — |
-| TPU (Polyflex TPU90) | 220°C | 45°C | Off | 0.1 | Flow ratio 0.99. Polymaker brand |
+| PETG (Sunlu) | 250°C | 80°C | Off / <40°C | 0.045 | Flow ratio 0.96, max vol speed 25mm³/s. Door cracked if chamber >40°C |
+| PLA | 210°C | 55°C | Off | per filament from slicer | — |
+| TPU (Polyflex TPU90) | 220°C | 35°C | Off | 0.1 | Flow ratio 0.99. Polymaker brand |
 
 ## Slicer
 - **OrcaSlicer** (Windows)
@@ -239,6 +239,5 @@ See **Maintenance_Log.md** in this repo for full schedule, task history, filamen
 - **Spoolman boot race:** Fixed via Moonraker systemd override (30s delay + After=docker.service)
 - **Sensorless homing:** SGT was 2, raised to 3 after early X trigger
 - **Auto-z plugin:** Removed after extensive issues; zero_reference_position at Sexbolt location was corrupting mesh offsets
-- **HelixScreen:** Install attempted but service not found; currently on KlipperScreen
 - **BoxTurtle:** Uninstalled — unreliable, AFC lane control buttons not working
 - **HW-104 amp:** Monophonic only — ESP32+I2S needed for multi-tone (future project)
