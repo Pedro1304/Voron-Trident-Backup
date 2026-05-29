@@ -17,7 +17,7 @@
 - **Remote access:** Tailscale — IP: `100.91.164.122`
 - **Mainsail (remote):** `http://100.91.164.122`
 - **Moonraker auth:** Tailscale subnet `100.64.0.0/10` added to trusted_clients
-- **Spoolman:** Running via Docker on port 8000 — `http://192.168.1.14:8000`
+- **Spoolman:** Running via Docker on port 8000 — `http://192.168.1.14:8000` — 11 spools tracked, exported to `spoolman_stats.json` every 60s
 
 ## Display
 - **BTT HDMI5 V1.2** — 5" IPS touchscreen, HDMI + USB touch
@@ -136,9 +136,9 @@
 ## Print Materials & Typical Settings
 | Material | Hotend | Bed | Chamber | PA | Notes |
 |----------|--------|-----|---------|-----|-------|
-| ASA (Polymaker) | 260°C | 100°C | 55°C | per filament from slicer | Main material (74% of all prints). Flow ratio 0.938, max vol speed 23mm³/s |
+| ASA (Polymaker/eSun) | 260°C | 100°C | 55°C | per filament from slicer | Main material (74% of all prints). Flow ratio 0.938, max vol speed 23mm³/s |
 | PETG (Sunlu) | 250°C | 80°C | Off / <40°C | 0.045 | Flow ratio 0.96, max vol speed 25mm³/s. Door cracked if chamber >40°C |
-| PLA | 210°C | 55°C | Off | per filament from slicer | — |
+| PLA (Sunlu/Polymaker) | 210°C | 55°C | Off | per filament from slicer | — |
 | TPU (Polyflex TPU90) | 220°C | 35°C | Off | 0.1 | Flow ratio 0.99. Polymaker brand |
 
 ## Slicer
