@@ -79,9 +79,9 @@
 | ~2025 | — | TRSYNC_TIMEOUT patched 0.025→0.075 | CAN bus timing fix |
 | ~2025 | — | Input shaper calibrated | X=MZV 72.8Hz, Y=EI 64.4Hz |
 | 2026-05-29 | — | OrcaSlicer backup set up | Daily auto-backup to Pedro1304/OrcaSlicer-Backup |
-| *fill in* | — | Last belt tension check | — |
-| *fill in* | — | Last lubrication | — |
-| *fill in* | — | Last nozzle change | — |
+| 2026-05-29 | — | Belt tension check | X and Y belts tensioned |
+| ~2026-02-29 | — | Leadscrew & rail lubrication | Approx 3 months ago from 2026-05-29 |
+| 2026-01-13 | — | Nozzle installed | Bondtech CHT Coated Brass 0.4mm (Nickel coated, high flow) |
 
 ---
 
@@ -93,7 +93,8 @@
 | Orbiter v2.5 + Turbiter + CPAP install | When parts ready | Pending — parts on hand |
 | Cartographer probe install | After toolhead mods | Planned |
 | BoxTurtle recommission | After toolhead mods | Paused |
-| Belt tension check | *fill in last date + 1 month* | Unknown — date needed |
-| Leadscrew lubrication | *fill in last date + 1 month* | Unknown — date needed |
-| Rail lubrication | *fill in last date + 1 month* | Unknown — date needed |
+| Nozzle replacement (CHT Brass) | ~2026-07-13 | Installed 2026-01-13 — monitor condition at 6 months |
+| Belt tension check | 2026-06-29 | ✅ Done 2026-05-29 — next in ~1 month |
+| Leadscrew lubrication | ~2026-05-29 | ⚠️ Due now — last done ~3 months ago |
+| Rail lubrication | ~2026-05-29 | ⚠️ Due now — last done ~3 months ago |
 

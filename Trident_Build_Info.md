@@ -79,7 +79,8 @@
 - **Thermal issue:** Motor reaches ~105–110°C in 60°C chamber at 0.85A — Turbiter cooling pending
 
 ### Hotend
-- **Phaetus Rapido v2**, 0.4mm nozzle
+- **Phaetus Rapido v2**
+- **Nozzle:** Bondtech CHT Coated Brass 0.4mm (Nickel coated, high flow, V6 compatible) — installed 2026-01-13
 - **Thermistor:** EPCOS 100K B57560G104F (NTC), pin `EBBCan:PA3` (TH0)
 - **Max temp:** 290°C
 - **Pressure advance:** 0.015, smooth time 0.03
