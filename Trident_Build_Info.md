@@ -25,6 +25,10 @@
 
 ## Camera
 - **Angry CAM USB V2** (chri.kai.in mod) — Waveshare OV5648 5MP USB, mounted to frame/gantry
+- **Streamer:** Crowsnest (ustreamer), port 8080, /dev/video10, 1920×1080 @ 30fps
+- **Stream URL (local):** `http://bigtreetech-cb2.local/webcam/?action=stream`
+- **Snapshot URL (local):** `http://bigtreetech-cb2.local/webcam/?action=snapshot`
+- **Stream URL (remote):** `http://100.91.164.122/webcam/?action=stream`
 
 ## Frame & Enclosure
 - **Frame:** Self-sourced Voron Trident 250
