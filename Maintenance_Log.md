@@ -98,10 +98,10 @@
 | ~2025 | — | TRSYNC_TIMEOUT patched 0.025→0.075 | CAN bus timing fix |
 | ~2025 | — | Input shaper calibrated | X=MZV 72.8Hz, Y=EI 64.4Hz |
 | 2026-05-29 | — | OrcaSlicer backup set up | Daily auto-backup to Pedro1304/OrcaSlicer-Backup |
-| 2026-05-29 | — | Belt tension check | X and Y belts tensioned |
+| 2026-05-29 | 225.8h | Belt tension check | X and Y belts tensioned |
 | 2026-05-29 | 225.8h | Leadscrew & rail lubrication | TR8×4 leadscrews + all MGN rails. Next due ~2026-08-29 or ~275h |
 | 2026-01-13 | — | Nozzle installed | Bondtech CHT Coated Brass 0.4mm (Nickel coated, high flow) |
-| ~2026-05-15 | 225.8h | PEI sheet replaced | New magnetic PEI spring steel sheet installed |
+| 2026-05-15 | — | PEI sheet replaced | New magnetic PEI spring steel sheet installed |
 
 ---
 
