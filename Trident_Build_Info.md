@@ -129,7 +129,7 @@
 | `AFC/*.cfg` | BoxTurtle / multi-material configs (paused) |
 
 ## Known Issues & History
-- Klipper shows "DIRTY" warning in Mainsail update manager — `klippy/mcu.py` is modified from stock, expected behaviour from installed extras (AFC/ShakeTune). Safe to ignore.
+- Klipper shows "DIRTY" warning in Mainsail update manager — `klippy/mcu.py` has one intentional change: `TRSYNC_TIMEOUT` increased from `0.025` to `0.075` (line ~256). This gives the CAN bus more time to respond during homing and prevents spurious "Timer too close" errors. Safe to ignore the dirty warning. If Klipper is ever updated and the patch is lost, re-apply this change manually.
 - CB2 systemd interactive editor saves empty files — always use `sudo tee`
 - Spoolman has boot race condition with Docker — fixed via Moonraker systemd override (30s delay + After=docker.service)
 - Sensorless homing SGT was 2, raised to 3 after early-trigger on X
