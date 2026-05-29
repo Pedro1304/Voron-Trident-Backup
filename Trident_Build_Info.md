@@ -33,6 +33,11 @@
 - **Surface:** Sitting on top of a Bambu P1 — hula feet critical to isolate vibration between machines. Do not print on both simultaneously at high speeds.
 - All input shaper values calibrated with hula feet in place — recalibrate if feet are removed/replaced
 
+## Frame & Enclosure
+- **Frame:** Self-sourced Voron Trident 250 kit
+- **Enclosure panels:** Acrylic
+- **Surface:** Table (not very stable — note: may affect input shaper results if table resonates)
+
 ## CAN Bus Network
 - **Interface:** `can0`, bitrate: `1000000` (1Mbit)
 - **Topology:** Octopus Pro (bridge) → EBB36 → (Cartographer spur, when added)
