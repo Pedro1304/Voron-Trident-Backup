@@ -137,7 +137,11 @@
 ## Slicer
 - **OrcaSlicer** (Windows)
 - **Printer profile name:** *fill in*
-- **Config backup:** *fill in — OrcaSlicer backup repo or path*
+- **Config backup:** `Pedro1304/OrcaSlicer-Backup` (private GitHub repo)
+- **Backed up folders:** `user`, `system`, `printers`, `plugins`
+- **Backup script:** `C:\Users\pmade\Documents\orca-backup.ps1`
+- **Schedule:** Daily at 12:00 via Windows Task Scheduler ("OrcaSlicer Backup" task)
+- **Manual trigger:** `Start-ScheduledTask -TaskName "OrcaSlicer Backup"` (run in PowerShell)
 
 ## Lighting, Audio & UI
 
