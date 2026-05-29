@@ -191,6 +191,22 @@
 4. **Audio upgrade** — ESP32 + I2S DAC for polyphonic audio (future)
 5. **More physical buttons** — 12mm illuminated buttons for additional printer functions
 
+## Installed Plugins & Software
+| Plugin | Purpose | Update Manager |
+|--------|---------|---------------|
+| KAMP (Klipper Adaptive Meshing & Purging) | Adaptive bed mesh | `Klipper-Adaptive-Meshing-Purging` |
+| ShakeTune (Klippain) | Input shaper analysis & graphs | `Klippain-ShakeTune` |
+| AFC-Klipper-Add-On | BoxTurtle multi-material | `afc-software` |
+| KlipperScreen | Touchscreen UI | `KlipperScreen` |
+| Crowsnest | Webcam streaming | `crowsnest` |
+| Sonar | WiFi keepalive daemon (disabled) | `sonar` |
+| print_area_bed_mesh | Bed mesh by print area | `print_area_bed_mesh` |
+| z_calibration (protoloft) | Auto Z calibration plugin | `z_calibration` (installed but removed from config) |
+| Mainsail | Web UI | `mainsail` |
+| Spoolman | Filament spool tracking | Docker container |
+
+**Note:** HelixScreen update_manager entry still exists in moonraker.conf — should be removed since HelixScreen was uninstalled.
+
 ## Key Config Files
 | File | Purpose |
 |------|---------|
