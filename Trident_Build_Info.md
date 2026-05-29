@@ -81,7 +81,7 @@
 - **Thermistor:** ATC Semitec 104GT-2, max 130°C
 - **Mesh:** 5×5, min 5,24 / max 245,244, KAMP adaptive meshing enabled
 - **Chamber sensor:** SHT31 (SHT3X compatible), I2C, scl `PB8`, sda `PB9`
-- **Chamber heater:** PID, max 70°C, heater pin `PA0`, fan `PE5`
+- **Chamber heater:** PTC 24V 150W (insulated, with built-in fan), heater pin `PA0`, fan `PE5`, PID controlled, max 70°C (software limit)
 - **Bed fans:** `PD15` — auto-managed, 100% when bed target active
 - **Intake fans:** `PA8`
 - **Exhaust fans:** `PD12`, `PD13`
