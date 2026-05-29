@@ -110,7 +110,7 @@
 
 | Task | Due | Status |
 |------|-----|--------|
-| Orbiter v2.5 + Turbiter + CPAP install | When parts ready | Pending — parts on hand |
+| Orbiter v2.5 + Turbiter + CPAP install | When parts ready | Pending — parts on hand (WS7040-24V blower confirmed) |
 | Cartographer probe install | After toolhead mods | Planned |
 | BoxTurtle recommission | After toolhead mods | Paused |
 | Nozzle replacement (CHT Brass) | ~2026-07-13 | Installed 2026-01-13 — monitor condition at 6 months |

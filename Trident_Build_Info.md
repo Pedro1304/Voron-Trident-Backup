@@ -68,7 +68,7 @@
 - **X:** MZV @ 72.8Hz
 - **Y:** EI @ 64.4Hz
 - ShakeTune installed, calibration kept manual (SAVE_CONFIG restarts Klipper)
-- **Last calibrated:** *fill in date*
+- **Last calibrated:** 2026-05-29 (pending — scheduled today)
 
 ## Toolhead — XOL
 ### Extruder
@@ -81,6 +81,7 @@
 ### Hotend
 - **Phaetus Rapido v2**
 - **Nozzle:** Bondtech CHT Coated Brass 0.4mm (Nickel coated, high flow, V6 compatible) — installed 2026-01-13
+- **⚠️ CHT warning:** Do NOT cold pull — damages nickel coating. Hot purge only (extrude at high temp).
 - **Thermistor:** EPCOS 100K B57560G104F (NTC), pin `EBBCan:PA3` (TH0)
 - **Max temp:** 290°C
 - **Pressure advance:** 0.015, smooth time 0.03
@@ -105,7 +106,7 @@
 ### Pending Toolhead Mods (all at once)
 - Orbiter v2.5 install
 - Turbiter 3010 blower motor cooling
-- CPAP part cooling
+- CPAP part cooling — **Mellow WS7040-24V** (24V brushless centrifugal blower, 6.5kPa)
 - EBB36 relocation to side mount (current position conflicts with Turbiter)
 - NTC B3950 motor thermistor wired to `EBBCan:PA2`
 
@@ -131,13 +132,13 @@
 ## Print Materials & Typical Settings
 | Material | Hotend | Bed | Chamber | Notes |
 |----------|--------|-----|---------|-------|
-| ASA | *fill in* | 100°C | 60°C | Main engineering material |
+| ASA | 260°C | 100°C | 60°C | Main material (74% of all prints) |
 | PETG | 230–250°C | 70–85°C | Off / <40°C | Door cracked if chamber >40°C |
-| PLA | *fill in* | *fill in* | Off | — |
+| PLA | 210°C | 60°C | Off | — |
 
 ## Slicer
 - **OrcaSlicer** (Windows)
-- **Printer profile name:** *fill in*
+- **Printer profile name:** Voron Trident 250
 - **Config backup:** `Pedro1304/OrcaSlicer-Backup` (private GitHub repo)
 - **Backed up folders:** `user`, `system`, `printers`, `plugins`
 - **Backup script:** `C:\Users\pmade\Documents\orca-backup.ps1`
@@ -211,13 +212,8 @@ sudo docker ps | grep spoolman
 tailscale status
 ```
 
-## Maintenance Log
-| Date | Action |
-|------|--------|
-| *fill in* | Input shaper calibration (X=MZV 72.8Hz, Y=EI 64.4Hz) |
-| *fill in* | SGT raised from 2 to 3 (sensorless homing early trigger) |
-| *fill in* | Auto-z plugin removed, switched to standard z_offset |
-| *fill in* | zero_reference_position corrected to 125,125 |
+## Maintenance
+See **Maintenance_Log.md** in this repo for full schedule, task history, filament breakdown, and upcoming/overdue tasks.
 
 ## Known Issues & History
 - **Klipper DIRTY:** `klippy/mcu.py` intentionally modified — `TRSYNC_TIMEOUT` changed from `0.025` to `0.075` (line ~256) to fix CAN bus timing. If lost after Klipper update, re-apply with the command in Useful Commands above.
