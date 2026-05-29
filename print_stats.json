@@ -11,7 +11,7 @@
       "hotend_typical": 220,
       "bed_typical": 35
     },
-    "[\"ASA\", \"ASA\"]": {
+    "Other": {
       "hotend_typical": 260,
       "bed_typical": 100
     },
@@ -24,5 +24,5 @@
       "bed_typical": 80
     }
   },
-  "last_updated": "2026-05-29 17:59:14"
+  "last_updated": "2026-05-29 18:00:58"
 }
