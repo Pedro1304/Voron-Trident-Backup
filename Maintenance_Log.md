@@ -103,6 +103,12 @@
 | 2026-05-29 | 225.8h | Leadscrew & rail lubrication | TR8×4 leadscrews + all MGN rails. Next due whichever comes first: ~2026-08-29 OR ~275.8h |
 | 2026-01-13 | — | Nozzle installed | Bondtech CHT Coated Brass 0.4mm (Nickel coated, high flow) |
 | 2026-05-15 | — | PEI sheet replaced | New magnetic PEI spring steel sheet installed |
+| 2026-05-29 | 225.8h | Bed mesh re-calibrated | After belt tension + lubrication today |
+| 2026-05-29 | 225.8h | Z offset verified | Paper test confirmed z_offset=8.15 still accurate |
+| 2026-05-29 | 225.8h | Pressure advance verified | No conflict between Klipper and OrcaSlicer PA values |
+| 2026-05-29 | 225.8h | Sensorless homing verified | Reliable triggering confirmed after belt tension |
+| 2026-05-29 | 225.8h | PEI sheet IPA clean | Thorough clean, ~2 weeks since install |
+| 2026-05-29 | 225.8h | Hotend inspection | Silicone sock removed, checked for filament creep — all good |
 
 ---
 

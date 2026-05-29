@@ -36,7 +36,7 @@
 ## Frame & Enclosure
 - **Frame:** Self-sourced Voron Trident 250 kit
 - **Enclosure panels:** Acrylic
-- **Surface:** Table (not very stable — note: may affect input shaper results if table resonates)
+- **Surface:** Table (not very stable — long term fix needed, accepted for now)
 
 ## CAN Bus Network
 - **Interface:** `can0`, bitrate: `1000000` (1Mbit)
