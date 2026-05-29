@@ -1,12 +1,23 @@
-# Voron Trident 250 — Hardware & Software Profile
+# Voron Trident 250 — Build Information Hub
 *Last updated: 2026-05-29*
+
+---
 
 ## Compute & Control
 - **Mainboard:** BTT Octopus Pro (CAN UUID: `24de3c7cb71e`)
 - **SBC:** BTT CB2, username `biqu`, timezone `Europe/Lisbon`
 - **Software:** Mainsail, Moonraker, Klipper, Spoolman (Docker), Tailscale
 - **GitHub backup:** `Pedro1304/Voron-Trident-Backup` via SSH key `~/.ssh/github_backup`, service `voron-backup.service`
+- **Manual backup trigger:** `sudo systemctl start voron-backup.service`
 - **Systemd note:** CB2 interactive editor always saves empty files — use `sudo tee ... << 'EOF'` for all systemd overrides
+
+## Network & Remote Access
+- **Local hostname:** `bigtreetech-cb2`
+- **Mainsail (local):** `http://bigtreetech-cb2.local`
+- **Remote access:** Tailscale — IP: `100.91.164.122`
+- **Mainsail (remote):** `http://100.91.164.122`
+- **Moonraker auth:** Tailscale subnet `100.64.0.0/10` added to trusted_clients
+- **Spoolman:** Running via Docker, accessible via Mainsail
 
 ## Display
 - **BTT HDMI5 V1.2** — 5" IPS touchscreen, HDMI + USB touch
@@ -15,26 +26,49 @@
 ## Camera
 - **Angry CAM USB V2** (chri.kai.in mod) — Waveshare OV5648 5MP USB, mounted to frame/gantry
 
+## CAN Bus Network
+- **Interface:** `can0`, bitrate: `1000000` (1Mbit)
+- **Topology:** Octopus Pro (bridge) → EBB36 → (Cartographer spur, when added)
+- **Octopus Pro UUID:** `24de3c7cb71e`
+- **EBB36 UUID:** `b8138acd0e11`
+- **Note:** Cannot flash EBB36 over CAN while Cartographer is connected — unplug CAN-H/L first
+
+## Power System
+- **Main PSU:** 24V (voltage/wattage — *fill in*)
+- **5V buck converter:** Powers HW-104 amp and LED strip logic — GND shared with Octopus
+- **Chamber heater:** PTC 24V 150W — powered directly from 24V rail
+- **Bed heater:** Silicone 110/220V 500W — mains powered via SSR
+
 ## Motion
 - **Kinematics:** CoreXY
 - **Build volume:** 250×250×220mm
 
 ### X/Y Motors
 - **Model:** LDO-42STH48-2804AH(S40R) — NEMA17, 40mm body, 2.8A rated, 180°C rated, long shaft
-- **Driver:** TMC5160T Pro at 2.5A run / 0.5A hold, 32 microsteps, stealthchop off
+- **Driver:** TMC5160T Pro at 2.5A run / 0.5A hold, 32 microsteps, stealthchop off, interpolation on
 - **Homing:** Sensorless (StallGuard4), SGT=3, 45mm/s, homing_retract_dist=0
 - **Homing macro:** Triple G28 — after first home moves Y+100mm, Z-10mm, then homes twice more for repeatability
 
 ### Z Motors (×3)
 - **Model:** Siboor 42STH26-0804A-200 — NEMA17, TR8×4 leadscrew 300mm, 1.0A rated
-- **Driver:** TMC2209 at 0.8A, 32 microsteps, stealthchop off
+- **Driver:** TMC2209 at 0.8A, 32 microsteps, stealthchop off, interpolation off
 - **rotation_distance:** 4 (TR8×4)
-- **Leveling:** Z-tilt (3-motor Trident)
+- **Leveling:** Z-tilt, 7 retries, tolerance 0.015mm
+
+### Speed & Acceleration Limits
+- **max_velocity:** 1100 mm/s
+- **max_accel:** 19000 mm/s²
+- **max_z_velocity:** 15 mm/s
+- **max_z_accel:** 350 mm/s²
+- **square_corner_velocity:** 5.0 mm/s
+- **Bed mesh speed:** 250 mm/s
+- **Z-tilt speed:** 175 mm/s
 
 ### Input Shaper
-- X = MZV @ 72.8Hz
-- Y = EI @ 64.4Hz
+- **X:** MZV @ 72.8Hz
+- **Y:** EI @ 64.4Hz
 - ShakeTune installed, calibration kept manual (SAVE_CONFIG restarts Klipper)
+- **Last calibrated:** *fill in date*
 
 ## Toolhead — XOL
 ### Extruder
@@ -50,6 +84,12 @@
 - **Max temp:** 290°C
 - **Pressure advance:** 0.015, smooth time 0.03
 
+### Firmware Retraction
+- **Retract length:** 0.5mm
+- **Retract speed:** 40 mm/s
+- **Unretract extra length:** 0mm
+- **Unretract speed:** 40 mm/s
+
 ### Toolhead Board
 - **BTT EBB36 v1.2** (CAN UUID: `b8138acd0e11`) on `can0`
 - **ADXL345:** SPI2, CS `EBBCan:PB12`
@@ -61,7 +101,7 @@
 - **Orbiter unload button:** `EBBCan:PB3`
 - **Motor thermistor (pending):** `EBBCan:PA2` (TH1) — NTC B3950 in Turbiter housing pocket
 
-### Pending Toolhead Mods (doing all at once)
+### Pending Toolhead Mods (all at once)
 - Orbiter v2.5 install
 - Turbiter 3010 blower motor cooling
 - CPAP part cooling
@@ -76,33 +116,45 @@
 - **safe_z_home:** 165,259
 
 ## Bed & Thermal
-- **Bed:** 250mm, 6061 aluminium 8mm plate 254×254mm, magnetic PEI spring steel sheet
-- **Bed heater:** Silicone 110/220V 500W (254×254mm)
-- **Thermistor:** ATC Semitec 104GT-2, max 130°C
+- **Bed plate:** 6061 aluminium 8mm, 254×254mm, magnetic PEI spring steel sheet
+- **Bed heater:** Silicone 110/220V 500W (254×254mm), mains via SSR
+- **Bed thermistor:** ATC Semitec 104GT-2, max 130°C
 - **Mesh:** 5×5, min 5,24 / max 245,244, KAMP adaptive meshing enabled
 - **Chamber sensor:** SHT31 (SHT3X compatible), I2C, scl `PB8`, sda `PB9`
 - **Chamber heater:** PTC 24V 150W (insulated, with built-in fan), heater pin `PA0`, fan `PE5`, PID controlled, max 70°C (software limit)
-- **Bed fans:** `PD15` — auto-managed, 100% when bed target active
-- **Intake fans:** `PA8`
-- **Exhaust fans:** `PD12`, `PD13`
-- All fans auto-managed via `UPDATE_FANS` macro based on bed/chamber/controller temps
+- **Bed fans:** `PD15` — 100% when bed target active, scales with bed temp otherwise
+- **Intake fans:** `PA8` — auto-managed, min 25%, ramps 40→100% between 50–65°C controller temp
+- **Exhaust fans:** `PD12`, `PD13` — same logic as intake
+- **Heater fan:** `PE5` — runs while chamber heater active, 45s cooldown after
+
+## Print Materials & Typical Settings
+| Material | Hotend | Bed | Chamber | Notes |
+|----------|--------|-----|---------|-------|
+| ASA | *fill in* | 100°C | 60°C | Main engineering material |
+| PETG | 230–250°C | 70–85°C | Off / <40°C | Door cracked if chamber >40°C |
+| PLA | *fill in* | *fill in* | Off | — |
+
+## Slicer
+- **OrcaSlicer** (Windows)
+- **Printer profile name:** *fill in*
+- **Config backup:** *fill in — OrcaSlicer backup repo or path*
 
 ## Lighting, Audio & UI
 
 ### Chamber LEDs
 - 32× GRB NeoPixel chain, Octopus `PB10`
-- Red = standby, Cyan = printing, Pulse animation (cyan↔orange) on pause, transition animation on print start
+- Red = standby, Cyan = printing, Cyan↔Orange pulse on pause, Red→Cyan transition on print start
 
 ### Physical Buttons
-- **LED brightness cycle button:** Octopus `PD6` — cycles 0/25/50/75/100% white brightness via `CYCLE_LED_BRIGHTNESS` macro
-- **Planned:** More buttons for different tasks (e.g. power button style — 12mm metal illuminated, 12-24V self-reset)
+- **LED brightness cycle:** Octopus `PD6` — cycles 0/25/50/75/100% white via `CYCLE_LED_BRIGHTNESS`
+- **Planned:** More 12mm metal illuminated buttons (12-24V, self-reset) for other tasks
 
 ### Audio
 - **Amp:** HW-104 (PAM8403), 5V, 3W/channel
 - **Signal pin:** Octopus `PB0` (PWM, `[output_pin beeper]`)
-- **Wiring:** 5V from buck converter, GND shared with Octopus, signal from PB0, L IN- tied to GND
-- **Capability:** Monophonic only (single PWM tone at a time) — multi-tone would require ESP32+I2S DAC (future project)
-- **Macros:** M300 (tone), CHIME_START, CHIME_DONE, CHIME_CANCEL, CHIME_PAUSE, SET_VOLUME, boot chime on startup
+- **Wiring:** 5V from buck converter, GND shared with Octopus, signal PB0, L IN- tied to GND
+- **Capability:** Monophonic only (single PWM tone) — multi-tone needs ESP32+I2S DAC (future)
+- **Macros:** M300, CHIME_START, CHIME_DONE, CHIME_CANCEL, CHIME_PAUSE, SET_VOLUME, boot chime
 
 ## Multi-Material (Paused)
 - **Unit:** BoxTurtle 4-lane, top-mounted
@@ -110,8 +162,15 @@
 - **Buffer:** TurtleNeck Pro
 - **Cutter:** FilamATrix (planned)
 - **Software:** AFC-Klipper Add-On (`[include AFC/*.cfg]` in printer.cfg)
-- **Status:** Uninstalled/paused — unreliable, focusing on toolhead mods first
+- **Status:** Uninstalled/paused — unreliable, resuming after toolhead mods complete
 - **Planned integration:** Happy Hare + Spoolman pull mode
+
+## Planned Mods Roadmap
+1. **Toolhead overhaul** — Orbiter v2.5 + Turbiter + CPAP + EBB36 side mount + motor thermistor (all at once)
+2. **Cartographer probe** — replace Klicky with Cartographer CAN (eddy current, touch mode)
+3. **BoxTurtle recommission** — AFC lane control fix, FilamATrix cutter, Happy Hare integration
+4. **Audio upgrade** — ESP32 + I2S DAC for polyphonic audio (future)
+5. **More physical buttons** — 12mm illuminated buttons for additional printer functions
 
 ## Key Config Files
 | File | Purpose |
@@ -128,12 +187,39 @@
 | `KAMP_Settings.cfg` | Adaptive mesh settings |
 | `AFC/*.cfg` | BoxTurtle / multi-material configs (paused) |
 
+## Useful Commands
+```bash
+# Manual config backup to GitHub
+sudo systemctl start voron-backup.service
+
+# Check CAN bus devices
+~/klippy-env/bin/python ~/klipper/scripts/canbus_query.py can0
+
+# Re-apply TRSYNC patch after Klipper update
+sed -i 's/TRSYNC_TIMEOUT = 0.025/TRSYNC_TIMEOUT = 0.075/' ~/klipper/klippy/mcu.py
+sudo systemctl restart klipper
+
+# Check Spoolman status
+sudo docker ps | grep spoolman
+
+# Tailscale status
+tailscale status
+```
+
+## Maintenance Log
+| Date | Action |
+|------|--------|
+| *fill in* | Input shaper calibration (X=MZV 72.8Hz, Y=EI 64.4Hz) |
+| *fill in* | SGT raised from 2 to 3 (sensorless homing early trigger) |
+| *fill in* | Auto-z plugin removed, switched to standard z_offset |
+| *fill in* | zero_reference_position corrected to 125,125 |
+
 ## Known Issues & History
-- Klipper shows "DIRTY" warning in Mainsail update manager — `klippy/mcu.py` has one intentional change: `TRSYNC_TIMEOUT` increased from `0.025` to `0.075` (line ~256). This gives the CAN bus more time to respond during homing and prevents spurious "Timer too close" errors. Safe to ignore the dirty warning. If Klipper is ever updated and the patch is lost, re-apply this change manually.
-- CB2 systemd interactive editor saves empty files — always use `sudo tee`
-- Spoolman has boot race condition with Docker — fixed via Moonraker systemd override (30s delay + After=docker.service)
-- Sensorless homing SGT was 2, raised to 3 after early-trigger on X
-- Auto-z plugin removed after extensive troubleshooting; zero_reference_position was corrupting mesh offsets
-- HelixScreen install attempted but service not found; currently on KlipperScreen
-- BoxTurtle uninstalled — unreliable operation, AFC lane control buttons not working
-- HW-104 amp is monophonic only; multi-tone audio requires different hardware (ESP32+I2S, future)
+- **Klipper DIRTY:** `klippy/mcu.py` intentionally modified — `TRSYNC_TIMEOUT` changed from `0.025` to `0.075` (line ~256) to fix CAN bus timing. If lost after Klipper update, re-apply with the command in Useful Commands above.
+- **CB2 systemd editor:** Always saves empty files — use `sudo tee` instead
+- **Spoolman boot race:** Fixed via Moonraker systemd override (30s delay + After=docker.service)
+- **Sensorless homing:** SGT was 2, raised to 3 after early X trigger
+- **Auto-z plugin:** Removed after extensive issues; zero_reference_position at Sexbolt location was corrupting mesh offsets
+- **HelixScreen:** Install attempted but service not found; currently on KlipperScreen
+- **BoxTurtle:** Uninstalled — unreliable, AFC lane control buttons not working
+- **HW-104 amp:** Monophonic only — ESP32+I2S needed for multi-tone (future project)
