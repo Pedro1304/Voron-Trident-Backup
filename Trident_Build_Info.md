@@ -162,7 +162,7 @@
 
 ### Chamber LEDs
 - 32× GRB NeoPixel chain, Octopus `PB10`
-- Red = standby, Cyan = printing, Cyan↔Orange pulse on pause, Red→Cyan transition on print start
+- Red = standby, Cyan = printing, Cyan↔Orange pulse on pause
 
 ### Physical Buttons
 - **LED brightness cycle:** Octopus `PD6` — cycles 0/25/50/75/100% white via `CYCLE_LED_BRIGHTNESS`
