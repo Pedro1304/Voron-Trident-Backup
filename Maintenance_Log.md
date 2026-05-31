@@ -93,7 +93,7 @@
 |------|-------------|------|-------|
 | ~2025 | — | Print history cleared | Reason unknown — only 1 job remained in Moonraker DB. 726 jobs/225.8h recovered from full list endpoint. Consider periodic Moonraker DB backup. |
 | ~2025 | — | SGT raised 2→3 | Sensorless homing early trigger on X |
-| 2026-05-31 | 232.7h | Sensorless homing retuned | SGT 3→2, speed 45→25mm/s, homing current 2.5→1.6A. Root causes: high speed caused hard crashes; full run current caused thermal drift (early triggers at 40°C+ chamber). Final: SGT=2, 25mm/s, 1.6A homing current — consistent cold and hot. Added [homing_override] with Y-first single-pass and SET_KINEMATIC_POSITION backoff. |
+| 2026-05-31 | 232.7h | Sensorless homing retuned | Final values: SGT=4, 25mm/s, full 2.5A run current. SGT=4 required for reliable homing at 55°C chamber — lower SGT caused early triggers when hot. Added [homing_override] with Y-first single-pass, SET_KINEMATIC_POSITION backoff, SET_TMC_FIELD to apply SGT at homing time. Verify SGT=4 does not miss endstop when cold. |
 | ~2025 | — | Auto-z plugin removed | Persistent conflicts; switched to standard z_offset |
 | ~2025 | — | zero_reference_position corrected | Was 165,259 (Sexbolt), changed to 125,125 (bed center) |
 | ~2025 | — | TRSYNC_TIMEOUT patched 0.025→0.075 | CAN bus timing fix |
