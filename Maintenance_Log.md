@@ -1,5 +1,5 @@
 # Voron Trident 250 — Maintenance Log
-*Last updated: 2026-05-30*
+*Last updated: 2026-05-31*
 
 > **Note on print stats:** Stats auto-fetched every 60s by `autobackup.sh` via `http://localhost/server/history/list?limit=9999` and saved to `print_stats.json`.
 
@@ -16,7 +16,7 @@
 ---
 
 ## Filament Usage Breakdown
-*Last updated: 2026-05-30*
+*Last updated: 2026-05-31*
 
 | Material | Meters | Jobs | % of total |
 |----------|--------|------|------------|
