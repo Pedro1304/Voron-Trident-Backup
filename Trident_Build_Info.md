@@ -57,7 +57,7 @@
 ### X/Y Motors
 - **Model:** LDO-42STH48-2804AH(S40R) — NEMA17, 40mm body, 2.8A rated, 180°C rated, long shaft
 - **Driver:** TMC5160T Pro at 2.5A run / 0.5A hold, 32 microsteps, stealthchop off, interpolation on
-- **Homing:** Sensorless (StallGuard4), SGT=3, 45mm/s, homing_retract_dist=0
+- **Homing:** Sensorless (StallGuard4), SGT=1, 25mm/s, homing_retract_dist=0
 - **Homing macro:** Triple G28 — after first home moves Y+100mm, Z-10mm, then homes twice more for repeatability
 
 ### Z Motors (×3)
