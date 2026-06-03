@@ -1,7 +1,7 @@
 {
   "total_jobs": 747,
-  "total_print_hours": 239.4,
-  "total_filament_meters": 1607.4,
+  "total_print_hours": 245.3,
+  "total_filament_meters": 1623.1,
   "material_temps": {
     "ASA": {
       "hotend_typical": 260,
@@ -24,5 +24,5 @@
       "bed_typical": 80
     }
   },
-  "last_updated": "2026-06-03 14:15:10"
+  "last_updated": "2026-06-03 14:16:19"
 }
