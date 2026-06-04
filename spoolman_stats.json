@@ -87,8 +87,8 @@
       "name": "Polymaker PolyLite\u2122 ASA Red",
       "material": "ASA",
       "color": "AF231C",
-      "remaining_weight": 889.5362570151626,
-      "used_weight": 110.4637429848374,
+      "remaining_weight": 889.4325355584934,
+      "used_weight": 110.56746444150653,
       "location": ""
     },
     {
@@ -101,5 +101,5 @@
       "location": ""
     }
   ],
-  "last_updated": "2026-06-04 17:01:20"
+  "last_updated": "2026-06-04 17:02:28"
 }
