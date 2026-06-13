@@ -8,9 +8,9 @@
 ## Current Stats
 | Metric | Value | Last checked |
 |--------|-------|-------------|
-| Total print time | 225.8 hours | 2026-05-29 |
-| Total jobs | 726 | 2026-05-29 |
-| Filament used (total) | 1536.6 meters | 2026-05-29 |
+| Total print time | 258.6 hours | 2026-06-13 |
+| Total jobs | 755 | 2026-06-13 |
+| Filament used (total) | 1709.6 meters | 2026-06-13 |
 | Most used filament | ASA 74% (1180m / 490 jobs) | 2026-05-29 |
 
 ---
@@ -91,6 +91,7 @@
 ## Task History
 | Date | Print Hours | Task | Notes |
 |------|-------------|------|-------|
+| 2026-06-13 | 258.6h | WS7040 CPAP blower wiring (in progress) | Blower installed + connected to Mellow driver board. Driver wiring: 24V+ to main rail, GND common with Octopus, signal (SV, pot removed) to Octopus **PG12** (5V positive logic pin — NOT a fan MOSFET). Part_Cooling fan to be reassigned EBBCan:PA1 -> PG12 once wiring complete. Frame-mounted (remote CPAP); Turbiter toolhead duct still pending. |
 | ~2025 | — | Print history cleared | Reason unknown — only 1 job remained in Moonraker DB. 726 jobs/225.8h recovered from full list endpoint. Consider periodic Moonraker DB backup. |
 | ~2025 | — | SGT raised 2→3 | Sensorless homing early trigger on X |
 | 2026-05-31 | 232.7h | Sensorless homing retuned | Final values: SGT=4, 25mm/s, full 2.5A run current. SGT=4 required for reliable homing at 55°C chamber — lower SGT caused early triggers when hot. Added [homing_override] with Y-first single-pass, SET_KINEMATIC_POSITION backoff, SET_TMC_FIELD to apply SGT at homing time. Verify SGT=4 does not miss endstop when cold. |
@@ -119,12 +120,12 @@
 
 | Task | Due | Status |
 |------|-----|--------|
-| Orbiter v2.5 + Turbiter + CPAP install | When parts ready | Pending — parts on hand (WS7040-24V blower confirmed) |
+| Orbiter v2.5 + Turbiter + CPAP install | In progress | WS7040 blower installed + driver wiring underway (signal -> Octopus PG12). Turbiter duct, Orbiter v2.5, EBB36 relocation, motor thermistor still pending. |
 | Cartographer probe install | After toolhead mods | Planned |
 | BoxTurtle recommission | After toolhead mods | Paused |
 | Nozzle replacement (CHT Brass) | ~2026-07-13 | Installed 2026-01-13 — monitor condition at 6 months |
 | PEI sheet check | ~2026-11-15 | Replaced ~2026-05-15 — monitor for delamination/wear at 6 months |
 | Belt tension check | 2026-06-29 | ✅ Done 2026-05-29 — next in ~1 month |
-| Leadscrew lubrication | 2026-08-29 or 275.8h | ✅ Done 2026-05-29 @ 225.8h — whichever comes first |
-| Rail lubrication | 2026-08-29 or 275.8h | ✅ Done 2026-05-29 @ 225.8h — whichever comes first |
+| Leadscrew lubrication | 2026-08-29 or 275.8h | ⏳ Approaching — at 258.6h, ~17 print-hrs out |
+| Rail lubrication | 2026-08-29 or 275.8h | ⏳ Approaching — at 258.6h, ~17 print-hrs out |
 

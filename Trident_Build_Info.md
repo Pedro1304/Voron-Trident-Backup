@@ -48,6 +48,7 @@
 - **Main PSU:** Meanwell LRS-350-24 (salvaged from Ender 3 Pro) — 24V, 350W, 14.6A
 - **5V buck converter:** Powers HW-104 amp and LED strip logic — GND shared with Octopus
 - **Chamber heater:** PTC 24V 150W — powered directly from 24V rail
+- **WS7040 CPAP driver:** Mellow driver board — 24V+/GND from main rail, GND common with Octopus (<1A draw, OK on LRS-350 for now)
 - **Bed heater:** Silicone 110/220V 500W — mains powered via SSR
 
 ## Motion
@@ -107,7 +108,7 @@
 - **BTT EBB36 v1.2** (CAN UUID: `b8138acd0e11`) on `can0`
 - **ADXL345:** SPI2, CS `EBBCan:PB12`
 - **Hotend heater:** `EBBCan:PB13`
-- **Part cooling fan:** `EBBCan:PA1`
+- **Part cooling fan:** `EBBCan:PA1` — being migrated to CPAP (WS7040) on Octopus `PG12`; PA1 freed after migration
 - **Hotend fan:** `EBBCan:PA0`
 - **Probe pin:** `EBBCan:PB9`
 - **Orbiter runout sensor:** `EBBCan:PB4`
@@ -117,7 +118,7 @@
 ### Pending Toolhead Mods (all at once)
 - Orbiter v2.5 install
 - Turbiter 3010 blower motor cooling
-- CPAP part cooling — **Mellow WS7040-24V** (24V brushless centrifugal blower, 6.5kPa)
+- CPAP part cooling — **Mellow WS7040-24V** (24V brushless centrifugal blower, 6.5kPa). **Wiring (in progress):** frame-mounted; driver signal (SV, pot removed) -> Octopus **PG12** (5V positive logic pin, NOT a fan MOSFET); 24V+/GND from main rail. Part_Cooling fan reassigned EBBCan:PA1 -> PG12. Klipper: kick_start_time 0.3, off_below 0.2, cycle_time 0.0003 (fallback 0.005 if low-speed jitter)
 - EBB36 relocation to side mount (current position conflicts with Turbiter)
 - NTC B3950 motor thermistor wired to `EBBCan:PA2`
 
