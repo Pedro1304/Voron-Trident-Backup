@@ -91,6 +91,7 @@
 ## Task History
 | Date | Print Hours | Task | Notes |
 |------|-------------|------|-------|
+| 2026-06-13 | 258.6h | WS7040 signal pin debug | PC5 failed — stuck-high, no PWM (blower constant-on at any SPEED/polarity; connection otherwise sound). Moved signal to **PG15 (Stop7)**, empty M7 slot. Config `pin: PG15`. Boot-spin fix (`!PG15` in menuconfig) + polarity bench-test to follow once modulation confirmed. |
 | 2026-06-13 | 258.6h | WS7040 CPAP blower wiring (in progress) | Blower installed + connected to Mellow driver board. Driver wiring: 24V+ to main rail, GND common with Octopus, signal (SV, pot removed) to Octopus **PG12** (5V positive logic pin — NOT a fan MOSFET). Part_Cooling fan to be reassigned EBBCan:PA1 -> PG12 once wiring complete. Frame-mounted (remote CPAP); Turbiter toolhead duct still pending. |
 | ~2025 | — | Print history cleared | Reason unknown — only 1 job remained in Moonraker DB. 726 jobs/225.8h recovered from full list endpoint. Consider periodic Moonraker DB backup. |
 | ~2025 | — | SGT raised 2→3 | Sensorless homing early trigger on X |
