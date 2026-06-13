@@ -1,5 +1,5 @@
 # Voron Trident 250 — Build Information Hub
-*Last updated: 2026-06-04*
+*Last updated: 2026-06-13*
 
 ---
 
