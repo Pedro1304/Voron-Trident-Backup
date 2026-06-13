@@ -108,7 +108,7 @@
 - **BTT EBB36 v1.2** (CAN UUID: `b8138acd0e11`) on `can0`
 - **ADXL345:** SPI2, CS `EBBCan:PB12`
 - **Hotend heater:** `EBBCan:PB13`
-- **Part cooling fan:** `EBBCan:PA1` — being migrated to CPAP (WS7040) on Octopus `PG12`; PA1 freed after migration
+- **Part cooling fan:** `EBBCan:PA1` — being migrated to CPAP (WS7040) on Octopus `PC5`; PA1 freed after migration
 - **Hotend fan:** `EBBCan:PA0`
 - **Probe pin:** `EBBCan:PB9`
 - **Orbiter runout sensor:** `EBBCan:PB4`
@@ -118,11 +118,12 @@
 ### Pending Toolhead Mods (all at once)
 - Orbiter v2.5 install
 - Turbiter 3010 blower motor cooling
-- CPAP part cooling — **Mellow FLY-7040 / WS7040-24V** (24V brushless centrifugal blower, 6.5kPa, 45000RPM). **Wiring (in progress):** frame-mounted; driver signal (Signal, pot removed) -> Octopus **PG12** (5V positive logic pin, NOT a fan MOSFET); leave driver VCC unconnected; 24V+/- to main rail (⚠️ marked polarity, do NOT reverse — damages fan). Part_Cooling fan reassigned EBBCan:PA1 -> PG12.
+- CPAP part cooling — **Mellow FLY-7040 / WS7040-24V** (24V brushless centrifugal blower, 6.5kPa, 45000RPM). **Wiring (in progress):** frame-mounted; driver signal (Signal, pot removed) -> Octopus **PC5** (free GPIO by CAN header, GND adjacent; NOT a fan MOSFET); leave driver VCC unconnected; 24V+/- to main rail (⚠️ marked polarity, do NOT reverse — damages fan). Part_Cooling fan reassigned EBBCan:PA1 -> PC5.
   - **Driver pinout:** Motor-out (3φ, pre-wired to blower) | Power-in +/- (2-pin) | Control VCC/Signal/GND (pot connector — use Signal+GND only for MCU)
   - **Klipper (Mellow reference):** `max_power: 0.9`, `cycle_time: 0.002`, `hardware_pwm: false`, `off_below: 0.2`, `kick_start_time: 0.3`, `shutdown_speed: 0`
-  - **⚠️ Auto-startup spin:** blower runs full speed on MCU boot until Klipper connects. Fix: add `!PG12` to Octopus firmware menuconfig 'GPIO pins to set at micro-controller startup', recompile + reflash.
-  - **⚠️ Verify polarity on bench:** SPEED=0 must be OFF, SPEED=1 must be FULL. If reversed, set `pin: !PG12`. (Mellow docs are AI-translated and internally inconsistent on polarity.)
+  - **⚠️ Auto-startup spin:** blower runs full speed on MCU boot until Klipper connects. Fix: add `!PC5` to Octopus firmware menuconfig 'GPIO pins to set at micro-controller startup', recompile + reflash.
+  - **⚠️ Verify polarity on bench:** SPEED=0 must be OFF, SPEED=1 must be FULL. If reversed, set `pin: !PC5`. (Mellow docs are AI-translated and internally inconsistent on polarity.)
+  - **Pin choice rationale:** PG12 (Bondtech's generic suggestion) REJECTED — it's Stop4/M4DIAG, the diag pin for the MOTOR4 slot = stepper_z1. Driving it as fan PWM would contend with the Z1 TMC2209 DIAG line. Free diag/stop pins on empty slots: PG11 (M3), PG14 (M6), PG15 (M7). PC5 chosen instead: not tied to any driver slot, GND adjacent at CAN header. Stop7/PG15 is the connector-based alternative.
 - EBB36 relocation to side mount (current position conflicts with Turbiter)
 - NTC B3950 motor thermistor wired to `EBBCan:PA2`
 
