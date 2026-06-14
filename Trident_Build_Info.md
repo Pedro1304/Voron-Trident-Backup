@@ -1,5 +1,5 @@
 # Voron Trident 250 — Build Information Hub
-*Last updated: 2026-06-13*
+*Last updated: 2026-06-14*
 
 ---
 
@@ -88,7 +88,7 @@
 - **Pending:** Orbiter v2.5 upgrade kit on hand — install together with Turbiter/CPAP mod
 - **Driver:** TMC2209 on EBB36, 0.85A run / 0.1A hold
 - **rotation_distance:** 4.637, 200 full steps, 16 microsteps
-- **Thermal issue:** Motor reaches ~105–110°C in 60°C chamber at 0.85A — Turbiter cooling pending
+- **Thermal issue:** Motor reached ~105–110°C in 60°C chamber at 0.85A — **Turbiter 3010 motor cooling installed 2026-06-14** (EBBCan:PA1). Verify motor temp under load; wire NTC B3950 to PA2 to quantify.
 
 ### Hotend
 - **Phaetus Rapido v2**
@@ -108,8 +108,9 @@
 - **BTT EBB36 v1.2** (CAN UUID: `b8138acd0e11`) on `can0`
 - **ADXL345:** SPI2, CS `EBBCan:PB12`
 - **Hotend heater:** `EBBCan:PB13`
-- **Part cooling fan:** `EBBCan:PA1` — being migrated to CPAP (WS7040) on Octopus `PG15` (Stop7); PA1 freed after migration
-- **Hotend fan:** `EBBCan:PA0`
+- **Part cooling fan (CPAP):** WS7040 on Octopus — **config pin currently `PB6`; docs/log previously said `PG15` (Stop7). ⚠️ CONFIRM final pin.** `[fan_generic Part_Cooling]`, M106/M107 remapped to it
+- **Turbiter motor cooling fan:** `EBBCan:PA1` (3010 blower) — `[heater_fan motor_cooling_fan]`, tied to extruder @ 50°C, full power. Installed 2026-06-14. Reuses the pin freed when part cooling moved to CPAP
+- **Hotend fan:** `EBBCan:PA0` — `[heater_fan hotend_fan]`, extruder @ 50°C
 - **Probe pin:** `EBBCan:PB9`
 - **Orbiter runout sensor:** `EBBCan:PB4`
 - **Orbiter unload button:** `EBBCan:PB3`
@@ -117,8 +118,8 @@
 
 ### Pending Toolhead Mods (all at once)
 - Orbiter v2.5 install
-- Turbiter 3010 blower motor cooling
-- CPAP part cooling — **Mellow FLY-7040 / WS7040-24V** (24V brushless centrifugal blower, 6.5kPa, 45000RPM). **Wiring (in progress):** frame-mounted; driver signal (Signal, pot removed) -> Octopus **PG15** (Stop7 / M7DIAG, empty slot, clean endstop GPIO; NOT a fan MOSFET); leave driver VCC unconnected; 24V+/- to main rail (⚠️ marked polarity, do NOT reverse — damages fan). Part_Cooling fan reassigned EBBCan:PA1 -> PG15.
+- ✅ Turbiter 3010 blower motor cooling — **installed 2026-06-14**, EBBCan:PA1
+- ✅ CPAP part cooling — **Mellow FLY-7040 / WS7040-24V** (24V brushless centrifugal blower, 6.5kPa, 45000RPM) — **blower fully installed 2026-06-14.** **Wiring:** frame-mounted; driver signal (Signal, pot removed) -> Octopus **PG15** (Stop7 / M7DIAG, empty slot, clean endstop GPIO; NOT a fan MOSFET); leave driver VCC unconnected; 24V+/- to main rail (⚠️ marked polarity, do NOT reverse — damages fan). Part_Cooling fan reassigned off EBBCan:PA1. ⚠️ Live config has it on `PB6`, not `PG15` — confirm and reconcile.
   - **Driver pinout:** Motor-out (3φ, pre-wired to blower) | Power-in +/- (2-pin) | Control VCC/Signal/GND (pot connector — use Signal+GND only for MCU)
   - **Klipper (Mellow reference):** `max_power: 0.9`, `cycle_time: 0.002`, `hardware_pwm: false`, `off_below: 0.2`, `kick_start_time: 0.3`, `shutdown_speed: 0`
   - **⚠️ Auto-startup spin:** blower runs full speed on MCU boot until Klipper connects. Fix: add `!PG15` to Octopus firmware menuconfig 'GPIO pins to set at micro-controller startup', recompile + reflash.

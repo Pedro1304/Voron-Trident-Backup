@@ -1,5 +1,5 @@
 # Voron Trident 250 — Maintenance Log
-*Last updated: 2026-06-13*
+*Last updated: 2026-06-14*
 
 > **Note on print stats:** Stats auto-fetched every 60s by `autobackup.sh` via `http://localhost/server/history/list?limit=9999` and saved to `print_stats.json`.
 
@@ -91,6 +91,8 @@
 ## Task History
 | Date | Print Hours | Task | Notes |
 |------|-------------|------|-------|
+| 2026-06-14 | 258.6h | Turbiter 3010 motor cooling — firmware/config | Blower + Turbiter physically installed. Configured `[heater_fan motor_cooling_fan]` on **EBBCan:PA1** (pin freed when part cooling moved to CPAP), tied to extruder @ 50°C, full power. No EBB36 reflash needed (PA1 already a firmware GPIO). Cleaned dead commented PA1 block from `_ebb36.cfg`. Interim heater_fan control until NTC B3950 motor thermistor wired to PA2 -> then convert to [temperature_fan]. |
+| 2026-06-14 | 258.6h | WS7040 CPAP blower fully installed | Part cooling blower install complete. ⚠️ Pin mismatch: live config `_ebb36.cfg` has Part_Cooling on **PB6**, but docs/prior log say **PG15 (Stop7)**. Needs confirmation to reconcile. Boot-spin (`!pin` menuconfig) + polarity bench-test still to verify on final pin. |
 | 2026-06-13 | 258.6h | WS7040 signal pin debug | PC5 failed — stuck-high, no PWM (blower constant-on at any SPEED/polarity; connection otherwise sound). Moved signal to **PG15 (Stop7)**, empty M7 slot. Config `pin: PG15`. Boot-spin fix (`!PG15` in menuconfig) + polarity bench-test to follow once modulation confirmed. |
 | 2026-06-13 | 258.6h | WS7040 CPAP blower wiring (in progress) | Blower installed + connected to Mellow driver board. Driver wiring: 24V+ to main rail, GND common with Octopus, signal (SV, pot removed) to Octopus **PG12** (5V positive logic pin — NOT a fan MOSFET). Part_Cooling fan to be reassigned EBBCan:PA1 -> PG12 once wiring complete. Frame-mounted (remote CPAP); Turbiter toolhead duct still pending. |
 | ~2025 | — | Print history cleared | Reason unknown — only 1 job remained in Moonraker DB. 726 jobs/225.8h recovered from full list endpoint. Consider periodic Moonraker DB backup. |
@@ -121,7 +123,8 @@
 
 | Task | Due | Status |
 |------|-----|--------|
-| Orbiter v2.5 + Turbiter + CPAP install | In progress | WS7040 blower installed + driver wiring underway (signal -> Octopus PG12). Turbiter duct, Orbiter v2.5, EBB36 relocation, motor thermistor still pending. |
+| Orbiter v2.5 + Turbiter + CPAP install | In progress | ✅ Turbiter 3010 motor cooling installed + configured (EBBCan:PA1). ✅ WS7040 CPAP blower fully installed. ⏳ Still pending: Orbiter v2.5 install, EBB36 side-mount relocation, NTC B3950 motor thermistor (PA2). ⚠️ Confirm CPAP final pin (config PB6 vs docs PG15). |
+| Motor thermistor -> temperature_fan | After thermistor wired | NTC B3950 to EBBCan:PA2 (TH1). Then convert `[heater_fan motor_cooling_fan]` to `[temperature_fan]` for proportional Turbiter control + quantify motor temp under load. |
 | Cartographer probe install | After toolhead mods | Planned |
 | BoxTurtle recommission | After toolhead mods | Paused |
 | Nozzle replacement (CHT Brass) | ~2026-07-13 | Installed 2026-01-13 — monitor condition at 6 months |
