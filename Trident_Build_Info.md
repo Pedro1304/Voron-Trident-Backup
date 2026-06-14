@@ -119,11 +119,11 @@
 ### Pending Toolhead Mods (all at once)
 - ✅ Orbiter v2.5 install — **done 2026-06-14**
 - ✅ Turbiter 3010 blower motor cooling — **installed 2026-06-14**, EBBCan:PA1
-- ✅ CPAP part cooling — **Mellow FLY-7040 / WS7040-24V** (24V brushless centrifugal blower, 6.5kPa, 45000RPM) — **blower fully installed 2026-06-14.** **Wiring:** frame-mounted; driver signal (Signal, pot removed) -> Octopus **PB6** (confirmed final; NOT a fan MOSFET); leave driver VCC unconnected; 24V+/- to main rail (⚠️ marked polarity, do NOT reverse — damages fan). Part_Cooling reassigned off EBBCan:PA1 -> Octopus PB6. ⚠️ Boot-spin fix: add `!PB6` to Octopus menuconfig 'GPIO pins to set at MCU startup', recompile + reflash. Bench-verify SPEED=0=OFF / SPEED=1=FULL.
+- ✅ CPAP part cooling — **Mellow FLY-7040 / WS7040-24V** (24V brushless centrifugal blower, 6.5kPa, 45000RPM) — **blower fully installed 2026-06-14.** **Wiring:** frame-mounted; driver signal (Signal, pot removed) -> Octopus **PB6** (confirmed final; NOT a fan MOSFET); leave driver VCC unconnected; 24V+/- to main rail (⚠️ marked polarity, do NOT reverse — damages fan). Part_Cooling reassigned off EBBCan:PA1 -> Octopus PB6. ✅ No boot-spin on PB6 (verified 2026-06-14) — no menuconfig fix needed; PB6 resets to a state the Mellow driver reads as off. Polarity confirmed SPEED=0=OFF / SPEED=1=FULL.
   - **Driver pinout:** Motor-out (3φ, pre-wired to blower) | Power-in +/- (2-pin) | Control VCC/Signal/GND (pot connector — use Signal+GND only for MCU)
   - **Klipper (Mellow reference):** `max_power: 0.9`, `cycle_time: 0.002`, `hardware_pwm: false`, `off_below: 0.2`, `kick_start_time: 0.3`, `shutdown_speed: 0`
-  - **⚠️ Auto-startup spin:** blower runs full speed on MCU boot until Klipper connects. Fix: add `!PG15` to Octopus firmware menuconfig 'GPIO pins to set at micro-controller startup', recompile + reflash.
-  - **⚠️ Verify polarity on bench:** SPEED=0 must be OFF, SPEED=1 must be FULL. If reversed, set `pin: !PG15`. (Mellow docs are AI-translated and internally inconsistent on polarity.)
+  - **Auto-startup spin:** was a concern on endstop GPIOs (PG12/PG15); on final pin **PB6 it does NOT occur** (verified 2026-06-14) — no menuconfig startup-pin fix required.
+  - **Polarity:** confirmed correct on PB6 — SPEED=0=OFF, SPEED=1=FULL (no `!` inversion needed).
   - **Pin choice history:** PG12 rejected (Stop4/M4DIAG = stepper_z1 slot, DIAG contention). PC5 then tried — FAILED: pin sits stuck-high, Klipper cannot pull it low, blower ran constant-on regardless of SPEED or polarity (PC5 is committed to an onboard function, not a free GPIO). **Final: PG15 (Stop7 / M7DIAG, empty slot)** — clean endstop GPIO, same pin class as Bondtech's proven PG12. Other free options: PG11 (M3), PG14 (M6).
 - ~~EBB36 side-mount relocation~~ — **NOT NEEDED** (2026-06-14): EBB36 mounts to the back of the Turbiter; no relocation required
 - NTC B3950 motor thermistor wired to `EBBCan:PA2`

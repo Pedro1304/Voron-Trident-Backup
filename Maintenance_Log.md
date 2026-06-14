@@ -92,7 +92,7 @@
 | Date | Print Hours | Task | Notes |
 |------|-------------|------|-------|
 | 2026-06-14 | 258.6h | Turbiter 3010 motor cooling — firmware/config | Blower + Turbiter physically installed. Configured `[heater_fan motor_cooling_fan]` on **EBBCan:PA1** (pin freed when part cooling moved to CPAP), tied to extruder @ 50°C, full power. No EBB36 reflash needed (PA1 already a firmware GPIO). Cleaned dead commented PA1 block from `_ebb36.cfg`. Interim heater_fan control until NTC B3950 motor thermistor wired to PA2 -> then convert to [temperature_fan]. |
-| 2026-06-14 | 258.6h | WS7040 CPAP blower fully installed | Part cooling blower install complete. Pin confirmed **Octopus PB6** (final; earlier PG15/PG12 abandoned). Docs reconciled. Remaining: boot-spin fix (`!PB6` in Octopus menuconfig + reflash) and polarity bench-test (SPEED=0=OFF / 1=FULL). |
+| 2026-06-14 | 258.6h | WS7040 CPAP blower fully installed | Part cooling blower install complete. Pin confirmed **Octopus PB6** (final; earlier PG15/PG12 abandoned). Docs reconciled. No boot-spin on PB6 (verified) — no menuconfig fix needed; polarity correct (SPEED=0=OFF / 1=FULL). CPAP fully done. |
 | 2026-06-14 | 258.6h | Orbiter v2.0 -> v2.5 upgrade | Extruder upgraded to Orbiter v2.5 (installed with Turbiter/CPAP). ⚠️ Recalibrate: extruder rotation_distance / e-steps + re-validate ASA flow ratio (0.938 on v2.0); confirm motor/run_current if kit changed stepper. |
 | 2026-06-14 | 258.6h | EBB36 side-mount relocation cancelled | No longer needed — EBB36 mounts to the back of the Turbiter. Removed from toolhead roadmap. |
 | 2026-06-13 | 258.6h | WS7040 signal pin debug | PC5 failed — stuck-high, no PWM (blower constant-on at any SPEED/polarity; connection otherwise sound). Moved signal to **PG15 (Stop7)**, empty M7 slot. Config `pin: PG15`. Boot-spin fix (`!PG15` in menuconfig) + polarity bench-test to follow once modulation confirmed. |
@@ -125,7 +125,7 @@
 
 | Task | Due | Status |
 |------|-----|--------|
-| Toolhead overhaul | Nearly complete | ✅ Orbiter v2.5, ✅ Turbiter motor cooling (PA1), ✅ WS7040 CPAP (PB6, confirmed). EBB36 relocation cancelled (mounts to Turbiter back). ⏳ Remaining: NTC B3950 motor thermistor (PA2), CPAP boot-spin `!PB6` reflash + polarity test, then Cartographer probe. |
+| Toolhead overhaul | Nearly complete | ✅ Orbiter v2.5, ✅ Turbiter motor cooling (PA1), ✅ WS7040 CPAP (PB6, confirmed). EBB36 relocation cancelled (mounts to Turbiter back). ⏳ Remaining: NTC B3950 motor thermistor (PA2), then Cartographer probe. CPAP fully done (no boot-spin on PB6). |
 | Motor thermistor -> temperature_fan | After thermistor wired | NTC B3950 to EBBCan:PA2 (TH1). Then convert `[heater_fan motor_cooling_fan]` to `[temperature_fan]` for proportional Turbiter control + quantify motor temp under load. |
 | Cartographer probe install | After toolhead mods | Planned |
 | BoxTurtle recommission | After toolhead mods | Paused |
