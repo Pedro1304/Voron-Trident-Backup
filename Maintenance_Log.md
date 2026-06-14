@@ -130,7 +130,7 @@
 | Motor thermistor -> temperature_fan | After thermistor wired | NTC B3950 to EBBCan:PA2 (TH1). Then convert `[heater_fan motor_cooling_fan]` to `[temperature_fan]` for proportional Turbiter control + quantify motor temp under load. |
 | Cartographer probe install | After toolhead mods | Planned |
 | Move backup repo off live config dir | Recommended (post-corruption) | Decouple git from `~/printer_data/config` — separate clone + copy/commit/push, so a backup-side corruption can't break Klipper's running config. |
-| CB2 storage health check | After 2026-06-14 corruption | `dmesg \| grep -i 'mmc\|i/o error'`. Zero-filled writes can indicate failing eMMC/SD. |
+| CB2 storage — migrate root off SD | HIGH (root cause of 2026-06-14 corruption) | dmesg 2026-06-14: root is on SD `mmcblk0p2` (SD32G); card **failed UHS tuning on boot, recovered on retry** (`All phases bad! / error -5`). Healthy 32GB eMMC `mmcblk1` (PJ3032, HS200) sits unused. Fix: swap to high-endurance SD (quick) OR migrate root to eMMC (best, 24/7 service). Also drop autobackup 60s -> 5-15min to shrink corruption window. |
 | BoxTurtle recommission | After toolhead mods | Paused |
 | Nozzle replacement (CHT Brass) | ~2026-07-13 | Installed 2026-01-13 — monitor condition at 6 months |
 | PEI sheet check | ~2026-11-15 | Replaced ~2026-05-15 — monitor for delamination/wear at 6 months |
