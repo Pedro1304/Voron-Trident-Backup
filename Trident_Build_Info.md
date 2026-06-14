@@ -84,8 +84,8 @@
 
 ## Toolhead — XOL
 ### Extruder
-- **Current:** Orbiter v2.0 (LDO-36STH20-1004AHG motor)
-- **Pending:** Orbiter v2.5 upgrade kit on hand — install together with Turbiter/CPAP mod
+- **Current:** Orbiter v2.5 — **upgraded 2026-06-14** from v2.0 (installed alongside Turbiter/CPAP)
+- ⚠️ **Recalibrate after v2.5 swap:** verify extruder `rotation_distance` (e-steps) and re-validate ASA flow ratio (was 0.938 on v2.0); confirm motor model/run_current if the kit changed the stepper
 - **Driver:** TMC2209 on EBB36, 0.85A run / 0.1A hold
 - **rotation_distance:** 4.637, 200 full steps, 16 microsteps
 - **Thermal issue:** Motor reached ~105–110°C in 60°C chamber at 0.85A — **Turbiter 3010 motor cooling installed 2026-06-14** (EBBCan:PA1). Verify motor temp under load; wire NTC B3950 to PA2 to quantify.
@@ -108,7 +108,7 @@
 - **BTT EBB36 v1.2** (CAN UUID: `b8138acd0e11`) on `can0`
 - **ADXL345:** SPI2, CS `EBBCan:PB12`
 - **Hotend heater:** `EBBCan:PB13`
-- **Part cooling fan (CPAP):** WS7040 on Octopus — **config pin currently `PB6`; docs/log previously said `PG15` (Stop7). ⚠️ CONFIRM final pin.** `[fan_generic Part_Cooling]`, M106/M107 remapped to it
+- **Part cooling fan (CPAP):** WS7040 on **Octopus `PB6`** (confirmed final 2026-06-14; earlier PG15/PG12 attempts abandoned). `[fan_generic Part_Cooling]`, M106/M107 remapped to it. Frame-mounted blower via Mellow driver
 - **Turbiter motor cooling fan:** `EBBCan:PA1` (3010 blower) — `[heater_fan motor_cooling_fan]`, tied to extruder @ 50°C, full power. Installed 2026-06-14. Reuses the pin freed when part cooling moved to CPAP
 - **Hotend fan:** `EBBCan:PA0` — `[heater_fan hotend_fan]`, extruder @ 50°C
 - **Probe pin:** `EBBCan:PB9`
@@ -117,15 +117,15 @@
 - **Motor thermistor (pending):** `EBBCan:PA2` (TH1) — NTC B3950 in Turbiter housing pocket
 
 ### Pending Toolhead Mods (all at once)
-- Orbiter v2.5 install
+- ✅ Orbiter v2.5 install — **done 2026-06-14**
 - ✅ Turbiter 3010 blower motor cooling — **installed 2026-06-14**, EBBCan:PA1
-- ✅ CPAP part cooling — **Mellow FLY-7040 / WS7040-24V** (24V brushless centrifugal blower, 6.5kPa, 45000RPM) — **blower fully installed 2026-06-14.** **Wiring:** frame-mounted; driver signal (Signal, pot removed) -> Octopus **PG15** (Stop7 / M7DIAG, empty slot, clean endstop GPIO; NOT a fan MOSFET); leave driver VCC unconnected; 24V+/- to main rail (⚠️ marked polarity, do NOT reverse — damages fan). Part_Cooling fan reassigned off EBBCan:PA1. ⚠️ Live config has it on `PB6`, not `PG15` — confirm and reconcile.
+- ✅ CPAP part cooling — **Mellow FLY-7040 / WS7040-24V** (24V brushless centrifugal blower, 6.5kPa, 45000RPM) — **blower fully installed 2026-06-14.** **Wiring:** frame-mounted; driver signal (Signal, pot removed) -> Octopus **PB6** (confirmed final; NOT a fan MOSFET); leave driver VCC unconnected; 24V+/- to main rail (⚠️ marked polarity, do NOT reverse — damages fan). Part_Cooling reassigned off EBBCan:PA1 -> Octopus PB6. ⚠️ Boot-spin fix: add `!PB6` to Octopus menuconfig 'GPIO pins to set at MCU startup', recompile + reflash. Bench-verify SPEED=0=OFF / SPEED=1=FULL.
   - **Driver pinout:** Motor-out (3φ, pre-wired to blower) | Power-in +/- (2-pin) | Control VCC/Signal/GND (pot connector — use Signal+GND only for MCU)
   - **Klipper (Mellow reference):** `max_power: 0.9`, `cycle_time: 0.002`, `hardware_pwm: false`, `off_below: 0.2`, `kick_start_time: 0.3`, `shutdown_speed: 0`
   - **⚠️ Auto-startup spin:** blower runs full speed on MCU boot until Klipper connects. Fix: add `!PG15` to Octopus firmware menuconfig 'GPIO pins to set at micro-controller startup', recompile + reflash.
   - **⚠️ Verify polarity on bench:** SPEED=0 must be OFF, SPEED=1 must be FULL. If reversed, set `pin: !PG15`. (Mellow docs are AI-translated and internally inconsistent on polarity.)
   - **Pin choice history:** PG12 rejected (Stop4/M4DIAG = stepper_z1 slot, DIAG contention). PC5 then tried — FAILED: pin sits stuck-high, Klipper cannot pull it low, blower ran constant-on regardless of SPEED or polarity (PC5 is committed to an onboard function, not a free GPIO). **Final: PG15 (Stop7 / M7DIAG, empty slot)** — clean endstop GPIO, same pin class as Bondtech's proven PG12. Other free options: PG11 (M3), PG14 (M6).
-- EBB36 relocation to side mount (current position conflicts with Turbiter)
+- ~~EBB36 side-mount relocation~~ — **NOT NEEDED** (2026-06-14): EBB36 mounts to the back of the Turbiter; no relocation required
 - NTC B3950 motor thermistor wired to `EBBCan:PA2`
 
 ## Probe & Z Endstop
@@ -192,7 +192,7 @@
 - **Planned integration:** Happy Hare + Spoolman pull mode
 
 ## Planned Mods Roadmap
-1. **Toolhead overhaul** — Orbiter v2.5 + Turbiter + CPAP + EBB36 side mount + motor thermistor (all at once)
+1. **Toolhead overhaul** — ✅ Orbiter v2.5 + Turbiter + CPAP done (2026-06-14); remaining: motor thermistor (PA2)
 2. **Cartographer probe** — replace Klicky with Cartographer CAN (eddy current, touch mode)
 3. **BoxTurtle recommission** — AFC lane control fix, FilamATrix cutter, Happy Hare integration
 4. **Audio upgrade** — ESP32 + I2S DAC for polyphonic audio (future)
