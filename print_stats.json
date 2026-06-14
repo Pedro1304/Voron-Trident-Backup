@@ -1,5 +1,5 @@
 {
-  "total_jobs": 761,
+  "total_jobs": 762,
   "total_print_hours": 258.9,
   "total_filament_meters": 1711.0,
   "material_temps": {
@@ -24,5 +24,5 @@
       "bed_typical": 80
     }
   },
-  "last_updated": "2026-06-14 17:22:36"
+  "last_updated": "2026-06-14 17:27:43"
 }
