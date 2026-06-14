@@ -91,6 +91,7 @@
 ## Task History
 | Date | Print Hours | Task | Notes |
 |------|-------------|------|-------|
+| 2026-06-14 | 258.6h | Git index/ref corruption — recovered | CB2 `~/printer_data/config` git broke: `bad signature 0x00000000` (zero-filled `.git/index`) + zero-filled loose `refs/heads/main` shadowing an older valid packed ref. Cause: unclean write/power-loss during a 60s autobackup cycle. Object DB intact (fsck clean, 9981 objs). Recovered without data loss: rebuilt index (`rm .git/index; git reset`), cleared broken loose+packed `main`, recreated `main`@`15ca7c7` via `update-ref`, mixed-reset, restored good docs via checkout. No config lost — all live files were byte-identical to repo except the two stale docs. fsck CLEAN post-recovery; backups flowing again. ⚠️ Follow-ups: check eMMC/SD health (`dmesg | grep -i mmc`); move backup repo OUT of the live config dir so this can't recur. |
 | 2026-06-14 | 258.6h | Turbiter 3010 motor cooling — firmware/config | Blower + Turbiter physically installed. Configured `[heater_fan motor_cooling_fan]` on **EBBCan:PA1** (pin freed when part cooling moved to CPAP), tied to extruder @ 50°C, full power. No EBB36 reflash needed (PA1 already a firmware GPIO). Cleaned dead commented PA1 block from `_ebb36.cfg`. Interim heater_fan control until NTC B3950 motor thermistor wired to PA2 -> then convert to [temperature_fan]. |
 | 2026-06-14 | 258.6h | WS7040 CPAP blower fully installed | Part cooling blower install complete. Pin confirmed **Octopus PB6** (final; earlier PG15/PG12 abandoned). Docs reconciled. No boot-spin on PB6 (verified) — no menuconfig fix needed; polarity correct (SPEED=0=OFF / 1=FULL). CPAP fully done. |
 | 2026-06-14 | 258.6h | Orbiter v2.0 -> v2.5 upgrade | Extruder upgraded to Orbiter v2.5 (installed with Turbiter/CPAP). ⚠️ Recalibrate: extruder rotation_distance / e-steps + re-validate ASA flow ratio (0.938 on v2.0); confirm motor/run_current if kit changed stepper. |
@@ -128,6 +129,8 @@
 | Toolhead overhaul | Nearly complete | ✅ Orbiter v2.5, ✅ Turbiter motor cooling (PA1), ✅ WS7040 CPAP (PB6, confirmed). EBB36 relocation cancelled (mounts to Turbiter back). ⏳ Remaining: NTC B3950 motor thermistor (PA2), then Cartographer probe. CPAP fully done (no boot-spin on PB6). |
 | Motor thermistor -> temperature_fan | After thermistor wired | NTC B3950 to EBBCan:PA2 (TH1). Then convert `[heater_fan motor_cooling_fan]` to `[temperature_fan]` for proportional Turbiter control + quantify motor temp under load. |
 | Cartographer probe install | After toolhead mods | Planned |
+| Move backup repo off live config dir | Recommended (post-corruption) | Decouple git from `~/printer_data/config` — separate clone + copy/commit/push, so a backup-side corruption can't break Klipper's running config. |
+| CB2 storage health check | After 2026-06-14 corruption | `dmesg \| grep -i 'mmc\|i/o error'`. Zero-filled writes can indicate failing eMMC/SD. |
 | BoxTurtle recommission | After toolhead mods | Paused |
 | Nozzle replacement (CHT Brass) | ~2026-07-13 | Installed 2026-01-13 — monitor condition at 6 months |
 | PEI sheet check | ~2026-11-15 | Replaced ~2026-05-15 — monitor for delamination/wear at 6 months |
