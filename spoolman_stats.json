@@ -24,8 +24,8 @@
       "name": "Sunlu Gold",
       "material": "PLA+",
       "color": "EFA537",
-      "remaining_weight": 679.0,
-      "used_weight": 321.0,
+      "remaining_weight": 678.0939984168374,
+      "used_weight": 321.90600158316255,
       "location": ""
     },
     {
@@ -78,8 +78,8 @@
       "name": "Polymaker Polylite Galaxy Black PLA",
       "material": "PLA",
       "color": "000000",
-      "remaining_weight": 406.32616326760365,
-      "used_weight": 593.6738367323964,
+      "remaining_weight": 406.13090248495837,
+      "used_weight": 593.8690975150416,
       "location": ""
     },
     {
@@ -101,5 +101,5 @@
       "location": ""
     }
   ],
-  "last_updated": "2026-06-15 19:50:07"
+  "last_updated": "2026-06-15 19:55:16"
 }
