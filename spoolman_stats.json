@@ -78,8 +78,8 @@
       "name": "Polymaker Polylite Galaxy Black PLA",
       "material": "PLA",
       "color": "000000",
-      "remaining_weight": 407.10254570081304,
-      "used_weight": 592.897454299187,
+      "remaining_weight": 406.32616326760365,
+      "used_weight": 593.6738367323964,
       "location": ""
     },
     {
@@ -101,5 +101,5 @@
       "location": ""
     }
   ],
-  "last_updated": "2026-06-15 19:44:58"
+  "last_updated": "2026-06-15 19:50:07"
 }
