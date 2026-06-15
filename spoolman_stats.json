@@ -24,8 +24,8 @@
       "name": "Sunlu Gold",
       "material": "PLA+",
       "color": "EFA537",
-      "remaining_weight": 678.0939984168374,
-      "used_weight": 321.90600158316255,
+      "remaining_weight": 677.7505589425191,
+      "used_weight": 322.24944105748085,
       "location": ""
     },
     {
@@ -101,5 +101,5 @@
       "location": ""
     }
   ],
-  "last_updated": "2026-06-15 19:55:16"
+  "last_updated": "2026-06-15 20:00:24"
 }
