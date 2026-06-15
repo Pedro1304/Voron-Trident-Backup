@@ -1,5 +1,5 @@
 # Voron Trident 250 — Maintenance Log
-*Last updated: 2026-06-14*
+*Last updated: 2026-06-15*
 
 > **Note on print stats:** Stats auto-fetched every 60s by `autobackup.sh` via `http://localhost/server/history/list?limit=9999` and saved to `print_stats.json`.
 
@@ -8,9 +8,9 @@
 ## Current Stats
 | Metric | Value | Last checked |
 |--------|-------|-------------|
-| Total print time | 258.6 hours | 2026-06-13 |
-| Total jobs | 755 | 2026-06-13 |
-| Filament used (total) | 1709.6 meters | 2026-06-13 |
+| Total print time | 260.7 hours | 2026-06-15 |
+| Total jobs | 772 | 2026-06-15 |
+| Filament used (total) | 1725.1 meters | 2026-06-15 |
 | Most used filament | ASA 74% (1180m / 490 jobs) | 2026-05-29 |
 
 ---
@@ -136,6 +136,6 @@
 | Nozzle replacement (CHT Brass) | ~2026-07-13 | Installed 2026-01-13 — monitor condition at 6 months |
 | PEI sheet check | ~2026-11-15 | Replaced ~2026-05-15 — monitor for delamination/wear at 6 months |
 | Belt tension check | 2026-06-29 | ✅ Done 2026-05-29 — next in ~1 month |
-| Leadscrew lubrication | 2026-08-29 or 275.8h | ⏳ Approaching — at 258.6h, ~17 print-hrs out |
-| Rail lubrication | 2026-08-29 or 275.8h | ⏳ Approaching — at 258.6h, ~17 print-hrs out |
+| Leadscrew lubrication | 2026-08-29 or 275.8h | ⏳ Approaching — at 260.7h, ~15 print-hrs out |
+| Rail lubrication | 2026-08-29 or 275.8h | ⏳ Approaching — at 260.7h, ~15 print-hrs out |
 
