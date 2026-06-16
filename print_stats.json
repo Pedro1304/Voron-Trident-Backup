@@ -1,15 +1,15 @@
 {
-  "total_jobs": 775,
+  "total_jobs": 776,
   "total_print_hours": 261.5,
   "total_filament_meters": 1730.1,
   "material_temps": {
-    "PLA": {
-      "hotend_typical": 210,
-      "bed_typical": 55
-    },
     "ASA": {
       "hotend_typical": 260,
       "bed_typical": 100
+    },
+    "PLA": {
+      "hotend_typical": 210,
+      "bed_typical": 55
     },
     "TPU": {
       "hotend_typical": 220,
@@ -24,5 +24,5 @@
       "bed_typical": 80
     }
   },
-  "last_updated": "2026-06-16 19:12:50"
+  "last_updated": "2026-06-16 19:17:59"
 }
