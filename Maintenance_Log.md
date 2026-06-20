@@ -8,9 +8,9 @@
 ## Current Stats
 | Metric | Value | Last checked |
 |--------|-------|-------------|
-| Total print time | 260.7 hours | 2026-06-15 |
-| Total jobs | 772 | 2026-06-15 |
-| Filament used (total) | 1725.1 meters | 2026-06-15 |
+| Total print time | 262.2 hours | 2026-06-20 |
+| Total jobs | 779 | 2026-06-20 |
+| Filament used (total) | 1732.8 meters | 2026-06-20 |
 | Most used filament | ASA 74% (1180m / 490 jobs) | 2026-05-29 |
 
 ---
@@ -137,6 +137,6 @@
 | Nozzle replacement (CHT Brass) | ~2026-07-13 | Installed 2026-01-13 — monitor condition at 6 months |
 | PEI sheet check | ~2026-11-15 | Replaced ~2026-05-15 — monitor for delamination/wear at 6 months |
 | Belt tension check | 2026-06-29 | ✅ Done 2026-05-29 — next in ~1 month |
-| Leadscrew lubrication | 2026-08-29 or 275.8h | ⏳ Approaching — at 260.7h, ~15 print-hrs out |
-| Rail lubrication | 2026-08-29 or 275.8h | ⏳ Approaching — at 260.7h, ~15 print-hrs out |
+| Leadscrew lubrication | 2026-08-29 or 275.8h | ⏳ Approaching — at 262.2h, ~14 print-hrs out |
+| Rail lubrication | 2026-08-29 or 275.8h | ⏳ Approaching — at 262.2h, ~14 print-hrs out |
 
