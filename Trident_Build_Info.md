@@ -1,5 +1,5 @@
 # Voron Trident 250 — Build Information Hub
-*Last updated: 2026-06-27*
+*Last updated: 2026-06-28*
 
 ---
 
@@ -112,8 +112,8 @@
 - **Turbiter motor cooling fan:** `EBBCan:PA1` (3010 blower) — `[heater_fan motor_cooling_fan]`, tied to extruder @ 50°C, full power. Installed 2026-06-14. Reuses the pin freed when part cooling moved to CPAP
 - **Hotend fan:** `EBBCan:PA0` — `[heater_fan hotend_fan]`, extruder @ 50°C
 - **Probe pin:** `EBBCan:PB9`
-- **Orbiter runout sensor:** `EBBCan:PB4`
-- **Orbiter unload button:** `EBBCan:PB3`
+- **`EBBCan:PB4` — shared pin, AFC owns it:** Was the Orbiter SmartSensor runout (`[filament_switch_sensor O2_sensor]`). With BoxTurtle/AFC live, `O2_sensor` is **commented out** in `Orbiter2_SmartSensor.cfg` and PB4 is now AFC's `pin_tool_start` (pre-extruder-gear toolhead sensor) in `AFC/AFC_Hardware.cfg`. ⚠️ Do NOT re-enable O2_sensor while AFC is active — duplicate PB4 button = boot error / sensor state fight.
+- **Orbiter unload button:** `EBBCan:PB3` (`[gcode_button filament_unload]`, still active — physical unload button)
 - **Motor thermistor (pending):** `EBBCan:PA2` (TH1) — NTC B3950 in Turbiter housing pocket
 
 ### Pending Toolhead Mods (all at once)
@@ -188,13 +188,15 @@
 - **Capability:** Monophonic only (single PWM tone) — multi-tone needs ESP32+I2S DAC (future)
 - **Macros:** M300, CHIME_START, CHIME_DONE, CHIME_CANCEL, CHIME_PAUSE, SET_VOLUME, boot chime
 
-## Multi-Material (Paused)
+## Multi-Material (Commissioning — AFC live)
 - **Unit:** BoxTurtle 4-lane, top-mounted
-- **Controller:** AFC-Lite board with lane control buttons (not working yet)
-- **Buffer:** TurtleNeck Pro
-- **Cutter:** FilamATrix (planned)
-- **Software:** AFC-Klipper Add-On (`[include AFC/*.cfg]` in printer.cfg)
-- **Status:** Uninstalled/paused — unreliable, resuming after toolhead mods complete
+- **Controller:** AFC-Lite board (powered direct via 24V/GND on CAN-port power pins, USB-C for data; BTIO hub pulled — dead short, RMA candidate)
+- **Buffer:** TurtleNeck Pro — **not yet configured** (`[AFC_buffer Turtle_1]` still commented in `AFC_Hardware.cfg`; no buffer feedback active)
+- **Cutter:** FilamATrix — installed but `tool_cut: False` in AFC.cfg (not in use yet)
+- **Software:** AFC-Klipper Add-On v1.1.0 — `[include AFC/*.cfg]` **ENABLED** in printer.cfg (2026-06-28)
+- **Toolhead sensor:** AFC `pin_tool_start: EBBCan:PB4` (Orbiter O2_sensor disabled — see CAN/toolhead notes). No `pin_tool_end`.
+- **Live load tuning (as of 2026-06-28 snapshot):** `afc_bowden_length: 1331.16`, `tool_stn: 72`, `tool_stn_unload: 100`; per-lane `dist_hub`: L1 162.33 / L2 90.6 / L3 87.88 / L4 149.94. Lane `run_current: 0.8`, `rotation_distance: 4.65`. ⚠️ These differ from the GitHub backup (repo lagging at bowden 1664.61 + O2_sensor active) — confirm autobackup has pushed live AFC tuning.
+- **Status:** Lanes 1 & 2 prep/load-to-hub OK. Lane 3 load-to-hub failing (under diagnosis). **Hub→toolhead load (T0) failing — `pin_tool_start`/PB4 not triggering (under diagnosis 2026-06-28).**
 - **Planned integration:** Happy Hare + Spoolman pull mode
 
 ## Planned Mods Roadmap
@@ -273,6 +275,6 @@ See **Maintenance_Log.md** in this repo for full schedule, task history, filamen
 - **Spoolman boot race:** Fixed via Moonraker systemd override (30s delay + After=docker.service)
 - **Sensorless homing:** SGT was 2, raised to 3 after early X trigger
 - **Auto-z plugin:** Removed after extensive issues; zero_reference_position at Sexbolt location was corrupting mesh offsets
-- **BoxTurtle:** Uninstalled — unreliable, AFC lane control buttons not working
+- **BoxTurtle:** Now **commissioning** (AFC v1.1.0 live, include enabled 2026-06-28). Lanes 1 & 2 load to hub; lane 3 to-hub and hub→toolhead load under diagnosis. BTIO hub pulled (dead short). See Maintenance_Log task history.
 - **HW-104 amp:** Monophonic only — ESP32+I2S needed for multi-tone (future project)
 - **ADXL345 SPI interference during ShakeTune:** At high frequencies (>125Hz), `spi_transfer_response` errors cause Klipper shutdown mid-sweep. **Fixed** by adding `MAX_FREQ=125` to calibration — wrapped in `AXES_SHAPER_CALIBRATION` macro override so it applies automatically. Resonant frequencies (71Hz/52Hz) are well below this cap so no data is lost. Monitor if errors return at lower frequencies.
