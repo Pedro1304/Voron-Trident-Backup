@@ -168,7 +168,7 @@
 - **Manual trigger:** `Start-ScheduledTask -TaskName "OrcaSlicer Backup"` (run in PowerShell)
 
 ### Manual Multi-Colour ("old way" — single extruder, manual swap)
-- **Klipper:** `[gcode_macro M600]` in `printer.cfg` — wraps `PAUSE` (parks X10/Y10, retract 1.5mm, Z+5, pause LEDs) + `CHIME_PAUSE` + Mainsail prompt with a Resume button.
+- **Klipper:** `[gcode_macro M600]` in `printer.cfg` — wraps `PAUSE` (parks X10/Y10, retract 1.5mm, Z+10, pause LEDs) + `CHIME_PAUSE` + Mainsail prompt with a Resume button.
 - **OrcaSlicer:** in Preview, use the right-hand layer slider → add colour change at the target layer (emits `M600`). Inserted at the *start* of that layer.
 - **Flow:** print pauses & parks → press Orbiter physical unload button → load new colour, purge clean → `RESUME` (or the prompt's Resume button).
 - **ASA note:** chamber 55°C / bed 100°C are held through the pause; keep the swap short to avoid warp, wipe ooze before resume.
