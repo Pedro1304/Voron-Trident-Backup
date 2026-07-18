@@ -15,6 +15,7 @@
 ## Network & Remote Access
 - **Local hostname:** `bigtreetech-cb2`
 - **Mainsail (local):** `http://bigtreetech-cb2.local`
+- **Mainsail (local, IP):** `http://192.168.1.17` — current DHCP-assigned local IP as of 2026-07-18 (was previously unreachable while printer was powered off for several weeks; use `.local` hostname if this IP drifts again)
 - **Remote access:** Tailscale — IP: `100.91.164.122`
 - **Mainsail (remote):** `http://100.91.164.122`
 - **Moonraker auth:** Tailscale subnet `100.64.0.0/10` added to trusted_clients
