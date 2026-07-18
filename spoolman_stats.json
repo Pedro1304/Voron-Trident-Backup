@@ -6,8 +6,8 @@
       "name": "Sunlu White",
       "material": "PETG",
       "color": "FFFFFF",
-      "remaining_weight": 1000.0,
-      "used_weight": 0.0,
+      "remaining_weight": 999.0651150406677,
+      "used_weight": 0.934884959332293,
       "location": ""
     },
     {
@@ -96,10 +96,10 @@
       "name": "Polymaker PolyLite\u2122 ASA Black",
       "material": "ASA",
       "color": "000000",
-      "remaining_weight": 338.73793951192613,
-      "used_weight": 661.2620604880739,
+      "remaining_weight": 188.80797413609582,
+      "used_weight": 811.1920258639042,
       "location": ""
     }
   ],
-  "last_updated": "2026-06-21 14:35:00"
+  "last_updated": "2026-07-18 08:41:33"
 }
