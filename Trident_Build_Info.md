@@ -1,11 +1,12 @@
 # Voron Trident 250 — Build Information Hub
-*Last updated: 2026-06-28*
+*Last updated: 2026-07-18*
 
 ---
 
 ## Compute & Control
 - **Mainboard:** BTT Octopus Pro (CAN UUID: `24de3c7cb71e`)
 - **SBC:** BTT CB2, username `biqu`, timezone `Europe/Lisbon`
+- **Storage:** microSD, SanDisk High Endurance 32GB (root, `mmcblk0`) — **installed 2026-07-18**, replacing the original SD32G card that repeatedly failed UHS SDR104 tuning on boot and caused two corruption incidents (git index/refs 2026-06-14, zero-filled docs 2026-06-27). eMMC (`mmcblk1`, healthy, unused) migration remains off the table per Pedro's decision.
 - **Software:** Mainsail, Moonraker, Klipper, Spoolman (Docker), Tailscale
 - **GitHub backup:** `Pedro1304/Voron-Trident-Backup` via SSH key `~/.ssh/github_backup`, service `voron-backup.service`
 - **Manual backup trigger:** `sudo systemctl start voron-backup.service`
